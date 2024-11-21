@@ -60,7 +60,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: app.jar
+          name: FuerUmmeApp.jar
           path: backend/target
 
       - name: Login to DockerHub
