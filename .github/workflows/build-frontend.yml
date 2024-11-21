@@ -1,4 +1,4 @@
-name: build-frontend
+name: SonarCloud frontend
 on:
   push:
     branches:
