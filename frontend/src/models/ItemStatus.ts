@@ -1,0 +1,1 @@
+export type ItemStatus = "TO_SELL" | "TO_LEND" | "TO_GIVE_AWAY"

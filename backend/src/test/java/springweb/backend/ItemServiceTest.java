@@ -1,0 +1,46 @@
+package springweb.backend;
+
+import org.junit.jupiter.api.Test;
+import springweb.backend.model.Item;
+import springweb.backend.model.ItemCategory;
+import springweb.backend.model.ItemStatus;
+import springweb.backend.repository.ItemRepository;
+import springweb.backend.service.IdService;
+import springweb.backend.service.ItemService;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+class ItemServiceTest {
+
+
+    IdService idService = mock(IdService.class);
+    ItemRepository itemRepository = mock(ItemRepository.class);
+    ItemService itemService = new ItemService(itemRepository,idService);
+
+
+    @Test
+    void getAllItems() {
+        //GIVEN
+        Item i1 = new Item("1","Hammer1","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND);
+        Item i2 = new Item("2","Hammer2","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND);
+        Item i3 = new Item("3","Hammer3","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND);
+        List<Item> expected = List.of(i1,i2,i3);
+
+        when(itemRepository.findAll()).thenReturn(List.of(i1,i2,i3));
+
+        //WHEN
+        List<Item> actual = itemService.getAllItems();
+
+        //THEN
+        verify(itemRepository).findAll();
+        assertEquals(expected, actual);
+
+
+    }
+
+}
+
+
