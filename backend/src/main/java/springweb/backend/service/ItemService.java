@@ -3,6 +3,7 @@ package springweb.backend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import springweb.backend.model.Item;
+import springweb.backend.model.ItemDto;
 import springweb.backend.repository.ItemRepository;
 
 import java.util.List;
@@ -14,12 +15,9 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
     private final IdService idService;
-/*    public ItemService(ItemRepository itemRepository,IdService idService) {
-        this.itemRepository = itemRepository;
-        this.idService = idService;
-    }*/
 
-    public Item createItem(Item itemDTO) {
+
+    public Item createItem(ItemDto itemDTO) {
         String id = idService.generateId();
 
         Item itemToSave = new Item(
@@ -31,8 +29,10 @@ public class ItemService {
                 itemDTO.status()
                 );
 
-        return itemRepository.save(itemToSave);
+        itemRepository.save(itemToSave);
+        return itemRepository.findById(itemToSave.id()).orElseThrow();
     }
+
 
     public List<Item> getAllItems() {
 
