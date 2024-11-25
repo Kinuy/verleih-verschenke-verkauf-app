@@ -2,13 +2,16 @@ import {Item} from "../models/Item.ts";
 import {FormEvent, useEffect, useState} from "react";
 import axios from "axios";
 import "./NewItemCard.css";
+import {ItemCategory} from "../models/ItemCategory.ts";
+import {ItemStatus} from "../models/ItemStatus.ts";
+import {ItemDto} from "../models/ItemDto.ts";
 
 export default function NewItemCard() {
 
     const itemData: Item = {
-        name: "item ame",
-        img: "item img_url",
-        description: "item description",
+        name: "",
+        img: "",
+        description: "",
         category: "TOOL",
         status: "TO_SELL"
     };
@@ -18,14 +21,27 @@ export default function NewItemCard() {
     const [itemName, setItemName] = useState("");
     const [itemImg, setItemImg] = useState("");
     const [itemDescription, setItemDescription] = useState("");
-    const [itemCategory, setItemCategory] = useState("");
-    const [itemStatus, setItemStatus] = useState("");
+    const [itemCategory, setItemCategory] = useState<ItemCategory>();
+    const [itemStatus, setItemStatus] = useState<ItemStatus>();
 
 
 
     function addItem(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        axios.post("/api/item", itemData)
+        if(!itemCategory || !itemStatus){
+            alert("Please check your input: category or status!");
+            return;
+        }
+
+        const savedItem: ItemDto = {
+            name: itemName || 'Default Name',
+            img: itemImg || 'default/url',
+            description: itemDescription || 'Default description',
+            category: itemCategory || 'TOOL',
+            status: itemStatus || 'TO_SELL'
+        };
+
+        axios.post("/api/item", savedItem)
             .then((response)=>{setItem(response.data)})
             .catch(error => {console.error("Error adding item:", error);
             });
