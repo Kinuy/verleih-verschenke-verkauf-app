@@ -43,23 +43,26 @@ export default function NewItemCard() {
         <div>
             <form className="newItemForm" onSubmit={addItem}>
                 <h2>Add Item</h2>
-                <label>Item name:
-                    <input
-                        type="text"
-                        value={itemName}
-                        placeholder="name"
-                        onChange={(e) => setItemName(e.target.value)}
-                    />
+                <label>
+                    <p>Item name:</p>
+                        <input
+                            type="text"
+                            value={itemName}
+                            placeholder="name"
+                            onChange={(e) => setItemName(e.target.value)}
+                        />
                 </label>
-                <label>Image:
-                    <input
-                        type="text"
-                        value={itemImg}
-                        placeholder="image"
-                        onChange={(e) => setItemImg(e.target.value)}
-                    />
+                <label>
+                    <p>Image:</p>
+                        <input
+                            type="text"
+                            value={itemImg}
+                            placeholder="image"
+                            onChange={(e) => setItemImg(e.target.value)}
+                        />
                 </label>
-                <label>Description:
+                <label>
+                    <p>Description:</p>
                     <input
                         type="text"
                         value={itemDescription}
@@ -67,21 +70,23 @@ export default function NewItemCard() {
                         onChange={(e) => setItemDescription(e.target.value)}
                     />
                 </label>
-                <label>Category:
-                    <input
-                        type="text"
-                        value={itemCategory}
-                        placeholder="TOOL"
-                        onChange={(e) => setItemCategory(e.target.value)}
-                    />
+                <label>
+                    <p>Category:</p>
+                        <input
+                            type="text"
+                            value={itemCategory}
+                            placeholder="TOOL"
+                            onChange={(e) => setItemCategory(e.target.value)}
+                        />
                 </label>
-                <label>Status:
-                    <input
-                        type="text"
-                        value={itemStatus}
-                        placeholder="TO_SELL"
-                        onChange={(e) => setItemStatus(e.target.value)}
-                    />
+                <label>
+                    <p>Status:</p>
+                        <input
+                            type="text"
+                            value={itemStatus}
+                            placeholder="TO_SELL"
+                            onChange={(e) => setItemStatus(e.target.value)}
+                        />
                 </label>
 
                 <button>add</button>
