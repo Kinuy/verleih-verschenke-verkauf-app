@@ -1,4 +1,5 @@
 import {Item} from "../models/Item.ts";
+import "./ItemCard.css";
 
 type Props = {
     item: Item;
