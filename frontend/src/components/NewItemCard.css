@@ -1,0 +1,9 @@
+.newItemForm{
+    display: flex;
+    flex-direction: column;   /* Align children (labels + inputs) vertically */
+    align-items: flex-start;  /* Align items to the left */
+    justify-content: flex-start; /* Start from the top */
+    gap: 10px;                /* Space between each form row */
+    padding: 20px;            /* Optional padding around the form */
+
+}
