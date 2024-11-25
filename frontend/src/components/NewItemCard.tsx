@@ -25,19 +25,12 @@ export default function NewItemCard() {
 
     function addItem(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        axios.post("/api/item", itemData).then(
-            (response)=>{
-                setItem(response.data)
-            }
-        )
-        console.log({itemName,itemImg,itemDescription,itemCategory,itemStatus})
+        axios.post("/api/item", itemData)
+            .then((response)=>{setItem(response.data)})
+            .catch(error => {console.error("Error adding item:", error);
+            });
     }
 
-    useEffect(() => {
-        if (item) {
-            console.log("Item state updated:", item);
-        }
-    }, [item]);
 
     return (
         <div>
