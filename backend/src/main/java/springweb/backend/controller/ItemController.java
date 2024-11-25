@@ -3,6 +3,7 @@ package springweb.backend.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import springweb.backend.model.Item;
+import springweb.backend.model.ItemDto;
 import springweb.backend.service.ItemService;
 
 import java.util.List;
@@ -14,9 +15,6 @@ public class ItemController {
 
     private final ItemService itemService;
 
-/*    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
-    }*/
 
     @GetMapping
     public List<Item> getAllItems() {
@@ -24,7 +22,7 @@ public class ItemController {
     }
 
     @PostMapping
-    public Item createItem(@RequestBody Item itemDTO) {
+    public Item createItem(@RequestBody ItemDto itemDTO) {
         return itemService.createItem(itemDTO);
     }
 }
