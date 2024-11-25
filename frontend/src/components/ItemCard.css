@@ -1,7 +1,8 @@
 .itemCard-container{
-    padding: 15px;
+    margin: 5px;
+    padding: 1px;
     border: 1px solid hsl(0,0%, 80%);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 5px 5px 5px hsla(0,0%,0%,0.1);
     text-align: center;
     background-color: hsla(50,0%,0%,0.4);
@@ -9,8 +10,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 150px;
+    height: 50px;
+
 
     cursor: pointer;
     transition: background-color 0.5s ease;
     box-sizing: border-box;
+}
+
+p{
+    font-size: small;
+    font-family: Arial, sans-serif;
 }
