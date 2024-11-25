@@ -3,20 +3,32 @@
 import axios from "axios";
 import {Item} from "./models/Item.ts";
 import "./models/ItemCategory.ts";
+import {FormEvent, useState} from "react";
+
 
 
 export default function App() {
 
+    const itemData: Item = {
+        name: "Hammer",
+        img: "url/hammer",
+        description: "Hammer aus meinem Keller",
+        category: "TOOL",
+        status: "TO_SELL"
+    };
 
-    function addItem() {
-        axios.post("api/item", {
-            name: "Hammer",
-            img: "url/hammer",
-            description: "Hammer aus meinem Keller",
-            category: "TOOL",
-            status: "TO_LEND"
-        } as Item).then();
+    const [item, setItem] = useState<Item>(itemData)
 
+
+
+    function addItem(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        axios.post("/api/item", itemData).then(
+            (response)=>{
+                setItem(response.data)
+                console.log(item)
+            }
+        )
     }
 
     return (
