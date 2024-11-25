@@ -2,6 +2,7 @@
 import "./models/ItemCategory.ts";
 import NewItemCard from "./components/NewItemCard.tsx";
 import ItemGallery from "./components/ItemGallery.tsx";
+import "./App.css";
 
 
 
@@ -12,8 +13,11 @@ export default function App() {
     return (
         <div>
             <h1>Fuer Umme App</h1>
-            <NewItemCard/>
-            <ItemGallery/>
+            <div className="landing-container">
+                <NewItemCard/>
+                <ItemGallery/>
+            </div>
+
         </div>
     )
 }
