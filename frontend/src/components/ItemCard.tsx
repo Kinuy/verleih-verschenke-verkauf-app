@@ -1,8 +1,16 @@
+import {Item} from "../models/Item.ts";
+import "./ItemCard.css";
 
-export default function ItemCard() {
+type Props = {
+    item: Item;
+}
+
+
+export default function ItemCard(props: Props) {
     return (
-        <div>
-
+        <div className="itemCard-container">
+            <p>{props.item.img}</p>
+            <p>{props.item.name}</p>
         </div>
     );
 };

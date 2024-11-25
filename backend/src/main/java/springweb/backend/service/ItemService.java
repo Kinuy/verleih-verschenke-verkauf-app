@@ -29,8 +29,7 @@ public class ItemService {
                 itemDTO.status()
                 );
 
-        itemRepository.save(itemToSave);
-        return itemRepository.findById(itemToSave.id()).orElseThrow();
+        return itemRepository.save(itemToSave);
     }
 
 

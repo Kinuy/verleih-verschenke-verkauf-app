@@ -1,8 +1,7 @@
 import {ItemCategory} from "./ItemCategory.ts";
 import {ItemStatus} from "./ItemStatus.ts";
 
-export type Item = {
-    id: string,
+export type ItemDto = {
     name: string,
     img: string,
     description: string,
