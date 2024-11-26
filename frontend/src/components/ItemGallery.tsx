@@ -5,7 +5,12 @@ import ItemCard from "./ItemCard.tsx";
 import "./ItemGallery.css";
 import ItemSearchBar from "./ItemSearchBar.tsx";
 
-export default function ItemGallery() {
+type Props = {
+    items: Item[];
+}
+
+
+export default function ItemGallery(props:Props) {
     const [items, setItems] = useState<Item[]>([])
     const [filteredItems, setFilteredItems] = useState<Item[]>([]);
 
@@ -35,7 +40,7 @@ export default function ItemGallery() {
 
     useEffect(() => {
         fetchAllItems()
-    }, []);
+    }, [props.items]);
 
     return (
         <div>
