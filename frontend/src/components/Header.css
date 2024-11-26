@@ -1,0 +1,29 @@
+.navbar{
+
+    margin: 1px;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+
+.navbar-link{
+    margin: 5px;
+    color: black;
+    padding: 5px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    background-color: hsla(1,1%,1%,1%);
+    text-decoration: none;
+
+}
+.navbar-link:hover{
+    margin: 5px;
+    padding: 5px;
+    background-color: hsla(1,1%,1%,10%);
+    border-radius: 5px;
+    text-decoration: none;
+
+}
