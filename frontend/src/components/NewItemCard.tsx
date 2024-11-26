@@ -1,5 +1,5 @@
 import {Item} from "../models/Item.ts";
-import {FormEvent, useEffect, useState} from "react";
+import {FormEvent, useState} from "react";
 import axios from "axios";
 import "./NewItemCard.css";
 import {ItemCategory} from "../models/ItemCategory.ts";
@@ -84,7 +84,7 @@ export default function NewItemCard() {
                 </label>
                 <label>
                     <p>Category:</p>
-                    <select name="category" id="category-select" onChange={(e) => setItemCategory(e.target.value)}>
+                    <select name="category" id="category-select" onChange={(e) => setItemCategory(e.target.value as ItemCategory)}>
                         <option value="">--Choose category--</option>
                         <option value={itemCategory}>TOOL</option>
                         <option value={itemCategory}>MATERIAL</option>
@@ -92,7 +92,7 @@ export default function NewItemCard() {
                 </label>
                 <label>
                     <p>Status:</p>
-                    <select name="status" id="status-select" onChange={(e) => setItemStatus(e.target.value)}>
+                    <select name="status" id="status-select" onChange={(e) => setItemStatus(e.target.value as ItemStatus)}>
                         <option value="">--Choose status--</option>
                         <option value={itemStatus}>TO_LEND</option>
                         <option value={itemStatus}>TO_GIVE_AWAY</option>
