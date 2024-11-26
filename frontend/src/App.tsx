@@ -12,7 +12,7 @@ export default function App() {
 
     return (
         <div>
-            <h1>Fuer Umme App</h1>
+            <h1>Fuer Umme / Im Keller wirds wieder heller....App</h1>
             <div className="landing-container">
                 <NewItemCard/>
                 <ItemGallery/>

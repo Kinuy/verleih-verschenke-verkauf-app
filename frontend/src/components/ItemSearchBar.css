@@ -1,0 +1,26 @@
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 2px;
+}
+
+.search-input {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.search-input:hover {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.75);
+    background-color: rgba(0, 123, 255, 0.1);
+    text-shadow: 0 0 5px rgba(0, 123, 255, 0.75);
+}
+
+.search-input:focus {
+    box-shadow: 0 0 15px rgba(0, 123, 255, 1);
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.15);
+    text-shadow: 0 0 8px rgba(0, 123, 255, 1);
+}
