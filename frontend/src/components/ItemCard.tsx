@@ -9,8 +9,12 @@ type Props = {
 export default function ItemCard(props: Props) {
     return (
         <div className="itemCard-container">
-            <p>{props.item.img}</p>
-            <p>{props.item.name}</p>
+            <img src={""} alt="item image"/>
+            <div className="itemCard-tags">
+                <p>{props.item.name}</p>
+                <p>{props.item.category}</p>
+                <p>{props.item.status}</p>
+            </div>
         </div>
     );
 };
