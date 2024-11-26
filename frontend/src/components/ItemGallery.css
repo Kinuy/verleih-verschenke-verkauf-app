@@ -2,7 +2,7 @@
     border: 1px solid hsl(0,0%, 80%);
     text-align: center;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .itemCardStatusSell-container{
