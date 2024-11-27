@@ -10,6 +10,7 @@ import springweb.backend.service.IdService;
 import springweb.backend.service.ItemService;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -59,6 +60,23 @@ class ItemServiceTest {
         assertEquals(expected, actual);
 
         verify(idService).generateId();
+
+    }
+
+    @Test
+    void getItemById_shouldReturnItem_whenGivenID1() {
+        //GIVEN
+        Item expected = new Item("1","Hammer1","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND);
+
+        when(itemRepository.findById("1")).thenReturn(Optional.of(expected));
+        //WHEN
+        Item actual =itemService.getItemById("1");
+        verify(itemRepository).findById("1");
+        //THEN
+        assertEquals(expected, actual);
+
+
+
 
     }
 
