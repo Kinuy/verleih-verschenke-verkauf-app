@@ -1,5 +1,6 @@
 import {Item} from "../models/Item.ts";
 import "./ItemCard.css";
+import {useNavigate} from "react-router";
 
 type Props = {
     item: Item;
@@ -7,8 +8,15 @@ type Props = {
 
 
 export default function ItemCard(props: Props) {
+
+    const navigate = useNavigate();
+
+    function handleClick(){
+        navigate(`/item/${props.item.id}`);
+    }
+
     return (
-        <div className="itemCard-container">
+        <div className="itemCard-container" onClick={handleClick}>
             <div className="itemCard-tags">
                 <p>{props.item.name}</p>
             </div>
