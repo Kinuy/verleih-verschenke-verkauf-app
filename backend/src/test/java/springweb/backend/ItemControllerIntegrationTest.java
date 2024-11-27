@@ -70,7 +70,7 @@ class ItemControllerIntegrationTest {
         List<Item> allItems = repo.findAll();
         Assertions.assertEquals(1, allItems.size());
 
-        Item savedItem = allItems.get(0);
+        Item savedItem = allItems.getFirst();
         org.assertj.core.api.Assertions.assertThat(savedItem)
                 .usingRecursiveComparison()
                 .ignoringFields("id")
