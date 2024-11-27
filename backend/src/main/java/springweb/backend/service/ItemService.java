@@ -37,4 +37,8 @@ public class ItemService {
 
         return itemRepository.findAll();
     }
+
+    public Item getItemById(String id) {
+        return itemRepository.findById(id).orElse(null);
+    }
 }
