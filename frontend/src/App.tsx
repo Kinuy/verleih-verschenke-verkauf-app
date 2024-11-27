@@ -9,6 +9,7 @@ import Home from "./components/Home.tsx";
 import axios from "axios";
 import {useState} from "react";
 import {Item} from "./models/Item.ts";
+import ItemDetails from "./components/ItemDetails.tsx";
 
 
 
@@ -30,6 +31,7 @@ export default function App() {
             <Header/>
             <Routes>
                 <Route path={"/"} element={<Home/>}/>
+                <Route path={"/item/:id"} element={<ItemDetails />}/>
                 <Route path={"/manage"} element={<NewItemCard updateList={fetchAllItems}/>}/>
                 <Route path={"/storage"} element={<ItemGallery items={items}/>}/>
                 <Route path={"*"} element={<p>Page not found!</p>}/>
