@@ -6,7 +6,12 @@ import {ItemCategory} from "../models/ItemCategory.ts";
 import {ItemStatus} from "../models/ItemStatus.ts";
 import {ItemDto} from "../models/ItemDto.ts";
 
-export default function NewItemCard() {
+
+type Props = {
+    updateList: ()=>void;
+}
+
+export default function NewItemCard(props: Props) {
 
     const itemData: Item = {
         id: "",
@@ -44,6 +49,7 @@ export default function NewItemCard() {
         axios.post("/api/item", savedItem)
             .then((response) => {
                 setItem(response.data)
+                props.updateList();
             })
             .catch(error => {
                 console.error("Error adding item:", error);
@@ -54,7 +60,7 @@ export default function NewItemCard() {
     return (
         <div>
             <form className="newItemForm" onSubmit={addItem}>
-                <h2>Add Item</h2>
+                <h2>Modify Item</h2>
                 <label>
                     <p>Item name:</p>
                     <input
