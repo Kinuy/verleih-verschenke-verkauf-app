@@ -1,7 +1,6 @@
 package springweb.backend.service;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 import springweb.backend.model.Item;
 import springweb.backend.model.ItemDto;
