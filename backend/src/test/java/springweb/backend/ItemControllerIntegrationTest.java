@@ -86,4 +86,26 @@ class ItemControllerIntegrationTest {
                 ));
     }
 
+    @Test
+    void getItemById_getItemWithId1_whenItemWithId1isRequested() throws Exception {
+
+        Item newItem = new Item("1","testName","testImg","testDescription",ItemCategory.TOOL,ItemStatus.TO_LEND);
+
+        repo.deleteAll();
+        repo.save(newItem);
+
+        mvc.perform(get("/api/item/{id}", 1))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                {
+                "id":"1",
+                "name":"testName",
+                "img":"testImg",
+                "description":"testDescription",
+                "category":"TOOL",
+                "status":"TO_LEND"
+                }
+                
+                """));
+    }
 }
