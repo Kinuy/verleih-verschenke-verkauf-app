@@ -25,4 +25,9 @@ public class ItemController {
     public Item createItem(@RequestBody ItemDto itemDTO) {
         return itemService.createItem(itemDTO);
     }
+
+    @GetMapping("/{id}")
+    public Item getItemById(@PathVariable String id){
+        return itemService.getItemById(id);
+    }
 }

@@ -1,6 +1,7 @@
 package springweb.backend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 import springweb.backend.model.Item;
 import springweb.backend.model.ItemDto;
@@ -36,5 +37,9 @@ public class ItemService {
     public List<Item> getAllItems() {
 
         return itemRepository.findAll();
+    }
+
+    public Item getItemById(String id) {
+        return itemRepository.findById(id).orElse(null);
     }
 }
