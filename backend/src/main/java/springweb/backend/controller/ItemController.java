@@ -30,4 +30,9 @@ public class ItemController {
     public Item getItemById(@PathVariable String id){
         return itemService.getItemById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteItem(@PathVariable String id) {
+        itemService.deleteItem(id);
+    }
 }
