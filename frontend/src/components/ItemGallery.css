@@ -1,25 +1,29 @@
 .ItemGallery-container{
-    justify-content: center;
+    display: flex;
+    justify-content: space-evenly;
+    padding:10px;
+    margin: 10px 10px 10px 10px;
     border: 1px solid hsl(0,0%, 80%);
     text-align: center;
-    display: flex;
+
     flex-wrap: wrap;
     max-width: 400px;
+
+
 
 }
 
 .ItemGalleryStatus-container{
     width: 100px;
     height: 100px;
-    margin: 1px;
+
     padding:1px;
-    border: 1px solid hsl(0,0%, 80%);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 5px 5px hsla(0,0%,0%,0.1);
+
 }
 
 .sell{
