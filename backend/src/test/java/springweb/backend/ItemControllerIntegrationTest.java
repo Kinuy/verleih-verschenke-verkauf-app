@@ -16,8 +16,7 @@ import org.springframework.http.MediaType;
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -107,5 +106,19 @@ class ItemControllerIntegrationTest {
                 }
                 
                 """));
+    }
+
+    @Test
+    void deleteItem() throws Exception {
+        //GIVEN
+        repo.deleteAll();
+        Item newItem = new Item("1","testname","testImg","testDescription",ItemCategory.TOOL,ItemStatus.TO_LEND);
+        repo.save(newItem);
+
+        //WHEN
+        mvc.perform(delete("/api/item/1"))
+        //THEN
+                .andExpect(status().isOk());
+        Assertions.assertFalse(repo.existsById("1"));
     }
 }
