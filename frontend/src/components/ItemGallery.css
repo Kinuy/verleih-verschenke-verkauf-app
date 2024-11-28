@@ -1,8 +1,11 @@
 .ItemGallery-container{
+    justify-content: center;
     border: 1px solid hsl(0,0%, 80%);
     text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 400px;
+
 }
 
 .ItemGalleryStatus-container{
