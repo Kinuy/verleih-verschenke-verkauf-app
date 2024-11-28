@@ -74,10 +74,17 @@ class ItemServiceTest {
         verify(itemRepository).findById("1");
         //THEN
         assertEquals(expected, actual);
+    }
 
-
-
-
+    @Test
+    void deleteItem(){
+        //GIVEN
+        when(itemRepository.existsById("1")).thenReturn(Boolean.TRUE);
+        //WHEN
+        itemService.deleteItem("1");
+        //THEN
+        verify(itemRepository).deleteById("1");
+        verify(itemRepository).existsById("1");
     }
 
 }
