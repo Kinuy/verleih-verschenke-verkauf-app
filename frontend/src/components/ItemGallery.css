@@ -1,8 +1,9 @@
 .ItemGallery-container{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     padding:10px;
     margin: 10px 10px 10px 10px;
+    border-radius: 5px;
     border: 1px solid hsl(0,0%, 80%);
     text-align: center;
 
@@ -14,14 +15,16 @@
 }
 
 .ItemGalleryStatus-container{
+    display: flex;
     width: 100px;
     height: 100px;
-
+    justify-content: center;
+    margin: 5px;
     padding:1px;
     border-radius: 5px;
-    display: flex;
+
     flex-direction: column;
-    justify-content: center;
+
     align-items: center;
 
 }
