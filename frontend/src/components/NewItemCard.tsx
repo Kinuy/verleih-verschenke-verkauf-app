@@ -1,5 +1,5 @@
 import {Item} from "../models/Item.ts";
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import axios from "axios";
 import "./NewItemCard.css";
 import {ItemCategory} from "../models/ItemCategory.ts";
@@ -29,6 +29,8 @@ export default function NewItemCard(props: Props) {
     const [itemDescription, setItemDescription] = useState("");
     const [itemCategory, setItemCategory] = useState<ItemCategory>();
     const [itemStatus, setItemStatus] = useState<ItemStatus>();
+    const [deleteId, setDeleteId] = useState<string>("")
+    const [items,setItems] = useState<Item[]>([])
 
 
     function addItem(event: FormEvent<HTMLFormElement>) {
@@ -56,6 +58,27 @@ export default function NewItemCard(props: Props) {
             });
     }
 
+    function fetchAllItems(){
+        axios.get("/api/item")
+            .then((response)=>{
+                setItems(response.data);
+            })
+            .catch(error => {console.error("Error fetching item list:", error);
+            });
+    }
+
+    function deleteItem(){
+        const checkDelete = window.confirm("Do you reeeeeeeeeeaaaaaaly want to delete this item?")
+        if(checkDelete){
+            axios.delete(`api/item/${deleteId}`)
+                .then(props.updateList)
+                .catch((error)=>{console.error(error)})
+        }
+    }
+
+    useEffect(() => {
+        fetchAllItems()
+    }, [deleteId]);
 
     return (
         <div>
@@ -90,7 +113,8 @@ export default function NewItemCard(props: Props) {
                 </label>
                 <label>
                     <p>Category:</p>
-                    <select name="category" id="category-select" onChange={(e) => setItemCategory(e.target.value as ItemCategory)}>
+                    <select name="category" id="category-select"
+                            onChange={(e) => setItemCategory(e.target.value as ItemCategory)}>
                         <option value="">--Choose category--</option>
                         <option value={itemCategory}>TOOL</option>
                         <option value={itemCategory}>MATERIAL</option>
@@ -98,7 +122,8 @@ export default function NewItemCard(props: Props) {
                 </label>
                 <label>
                     <p>Status:</p>
-                    <select name="status" id="status-select" onChange={(e) => setItemStatus(e.target.value as ItemStatus)}>
+                    <select name="status" id="status-select"
+                            onChange={(e) => setItemStatus(e.target.value as ItemStatus)}>
                         <option value="">--Choose status--</option>
                         <option value={itemStatus}>TO_LEND</option>
                         <option value={itemStatus}>TO_GIVE_AWAY</option>
@@ -107,6 +132,19 @@ export default function NewItemCard(props: Props) {
                 </label>
                 <button>add</button>
             </form>
+
+            <div className="delete-item-container">
+                <select className="select-item-container" name="item" id="item-select" onChange={(e)=>setDeleteId(e.target.value)}>
+                    <option value="">--Select item to delete--</option>
+                    {
+                        items.map((element) => {
+                            return <option key={element.id} value={element.id}>{element.name}</option>
+                        })
+                    }
+                </select>
+                <button onClick={deleteItem}>delete</button>
+            </div>
+
         </div>
     );
 };
