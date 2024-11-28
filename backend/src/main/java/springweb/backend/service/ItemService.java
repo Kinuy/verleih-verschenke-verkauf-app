@@ -2,6 +2,7 @@ package springweb.backend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import springweb.backend.exception.ItemException;
 import springweb.backend.model.Item;
 import springweb.backend.model.ItemDto;
 import springweb.backend.repository.ItemRepository;
@@ -40,5 +41,12 @@ public class ItemService {
 
     public Item getItemById(String id) {
         return itemRepository.findById(id).orElse(null);
+    }
+
+    public void deleteItem(String id) {
+        if(!itemRepository.existsById(id)) {
+            throw new ItemException("Item with id " + id + " not found");
+        }
+        itemRepository.deleteById(id);
     }
 }
