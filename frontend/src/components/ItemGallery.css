@@ -1,15 +1,16 @@
 .ItemGallery-container{
     display: flex;
+    /*align-items: center;*/
     justify-content: center;
     padding:10px;
     margin: 10px 10px 10px 10px;
     border-radius: 5px;
     border: 1px solid hsl(0,0%, 80%);
-    text-align: center;
+    /*text-align: center;*/
 
     flex-wrap: wrap;
-    max-width: 400px;
-
+    /*max-width: 400px;*/
+    /*width: 400px;*/
 
 
 }
