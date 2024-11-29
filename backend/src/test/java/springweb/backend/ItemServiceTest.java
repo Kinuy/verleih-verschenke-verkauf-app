@@ -87,6 +87,24 @@ class ItemServiceTest {
         verify(itemRepository).existsById("1");
     }
 
+    @Test
+    void updateItem(){
+        //GIVEN
+        Item originItem = new Item("1","test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND);
+        Item modItem = new Item("1","test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_SELL);
+
+        when(itemRepository.save(originItem)).thenReturn(originItem);
+        when(itemRepository.existsById("1")).thenReturn(Boolean.TRUE);
+
+        //WHEN
+        Item expected = itemService.updateItem("1",modItem);
+
+        //THEN
+        assertEquals(expected,originItem);
+        verify(itemRepository,times(1)).save(modItem);
+
+    }
+
 }
 
 
