@@ -17,6 +17,9 @@ export default function App() {
 
     const [items, setItems] = useState<Item[]>([])
 
+    document.title = "MyStorage";
+
+
     function fetchAllItems(){
         axios.get("/api/item")
             .then((response)=>{
