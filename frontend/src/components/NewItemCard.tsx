@@ -56,7 +56,7 @@ export default function NewItemCard(props: Props) {
     }
 
     function deleteItem(){
-        const checkDelete = window.confirm("Do you reeeeeeeeeeaaaaaaly want to delete this item?")
+        const checkDelete = window.confirm("Do you really want to delete this item?")
         if(checkDelete){
             axios.delete(`api/item/${deleteId}`)
                 .then(props.updateList)
