@@ -35,4 +35,16 @@ public class ItemController {
     public void deleteItem(@PathVariable String id) {
         itemService.deleteItem(id);
     }
+
+    @PutMapping("/{id}")
+    public Item updateItem(@PathVariable String id, @RequestBody ItemDto itemDTO) {
+        Item item = new Item(
+                id,
+                itemDTO.name(),
+                itemDTO.img(),
+                itemDTO.description(),
+                itemDTO.category(),
+                itemDTO.status());
+        return itemService.updateItem(id,item);
+    }
 }
