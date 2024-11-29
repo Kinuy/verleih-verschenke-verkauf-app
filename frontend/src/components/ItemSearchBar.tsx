@@ -20,7 +20,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         <div className="search-bar">
             <input
                 type="text"
-                placeholder="Items..."
+                placeholder="Search..."
                 value={query}
                 onChange={handleChange}
                 className="search-input"
