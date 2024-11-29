@@ -8,23 +8,34 @@
     flex-direction: column;
     gap: 10px;
 
-    border: 1px solid hsl(0,0%, 80%);
-    width: 400px;
+
 
 }
 h2{
     align-items: center;
 }
 
-.delete-item-container{
+.manage-container{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid hsl(0,0%, 80%);
+    margin: auto;
+
+    width: 400px;
+}
+
+.button-item-container{
     margin: auto;
     display: flex;
     border-radius: 5px;
     border: 1px solid hsl(0,0%, 80%);
     background-color: hsla(100,10%,10%,10%);
     flex-direction: column;
-    width: 400px;
-
+    width: 300px;
+    cursor: pointer;
+}
+.button-item-container:hover{
+    background-color: hsla(50,10%,10%,40%);
 }
 
 .select-item-container{
