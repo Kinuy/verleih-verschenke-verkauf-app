@@ -35,7 +35,7 @@ export default function App() {
             <Routes>
                 <Route path={"/"} element={<Home/>}/>
                 <Route path={"/item/:id"} element={<ItemDetails />}/>
-                <Route path={"/manage"} element={<NewItemCard updateList={fetchAllItems}/>}/>
+                <Route path={"/manage"} element={<NewItemCard updateList={fetchAllItems} items={items}/>}/>
                 <Route path={"/storage"} element={<ItemGallery items={items}/>}/>
                 <Route path={"*"} element={<p>Page not found!</p>}/>
             </Routes>
