@@ -13,17 +13,6 @@ type Props = {
 
 export default function NewItemCard(props: Props) {
 
-    const itemData: Item = {
-        id: "",
-        name: "",
-        img: "",
-        description: "",
-        category: "TOOL",
-        status: "TO_SELL"
-    };
-
-    const [item, setItem] = useState<Item>(itemData)
-
     const [itemName, setItemName] = useState("");
     const [itemImg, setItemImg] = useState("");
     const [itemDescription, setItemDescription] = useState("");
@@ -49,8 +38,7 @@ export default function NewItemCard(props: Props) {
         };
 
         axios.post("/api/item", savedItem)
-            .then((response) => {
-                setItem(response.data)
+            .then(() => {
                 props.updateList();
             })
             .catch(error => {
