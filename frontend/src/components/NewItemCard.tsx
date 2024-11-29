@@ -110,12 +110,12 @@ export default function NewItemCard(props: Props) {
                 </label>
                 <label>
                     <p>Status:</p>
-                    <select name="status" id="status-select"
+                    <select className="select-status-container" name="status" id="status-select"
                             onChange={(e) => setItemStatus(e.target.value as ItemStatus)}>
                         <option value="">--Choose status--</option>
-                        <option value={itemStatus}>TO_LEND</option>
-                        <option value={itemStatus}>TO_GIVE_AWAY</option>
-                        <option value={itemStatus}>TO_SELL</option>
+                        <option className="lend-container" value={itemStatus}>TO_LEND</option>
+                        <option className="give-container" value={itemStatus}>TO_GIVE_AWAY</option>
+                        <option className="sell-container" value={itemStatus}>TO_SELL</option>
                     </select>
                 </label>
                 <button>add</button>
