@@ -90,17 +90,17 @@ class ItemServiceTest {
     @Test
     void updateItem(){
         //GIVEN
-        Item originItem = new Item("1","test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND);
         Item modItem = new Item("1","test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_SELL);
 
-        when(itemRepository.save(originItem)).thenReturn(originItem);
-        when(itemRepository.existsById("1")).thenReturn(Boolean.TRUE);
+        when(itemRepository.existsById("1")).thenReturn(true);
+        when(itemRepository.save(any(Item.class))).thenReturn(modItem);
 
         //WHEN
         Item expected = itemService.updateItem("1",modItem);
 
         //THEN
-        assertEquals(expected,originItem);
+        assertEquals(modItem,expected);
+        verify(itemRepository,times(1)).existsById("1");
         verify(itemRepository,times(1)).save(modItem);
 
     }
