@@ -16,5 +16,6 @@ Features
 
 Live Demo
 
-Check out the app hosted here: 
+Check out the app hosted here. 
+Please be patient, as the server is running slowly. 
 https://stuffloop.onrender.com
