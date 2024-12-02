@@ -81,8 +81,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: push-to-docker-hub
     environment:
-      name: fuerummeapp # Capstone Project name
-      url: https://fuerummeapp.onrender.com/ # Link to deployment
+      name: stuffloopapp # Capstone Project name
+      url: https://stuffloop.onrender.com/ # Link to deployment
     steps:
       - name: Trigger Render.com Deployment
         run: |
