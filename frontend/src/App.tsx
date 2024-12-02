@@ -17,7 +17,7 @@ export default function App() {
 
     const [items, setItems] = useState<Item[]>([])
 
-    document.title = "MyStorage";
+    document.title = "StuffLoop";
 
 
     function fetchAllItems(){
