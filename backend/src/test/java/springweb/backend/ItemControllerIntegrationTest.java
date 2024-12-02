@@ -35,15 +35,15 @@ class ItemControllerIntegrationTest {
     MockRestServiceServer mockRestServiceServer;
 
     @Test
-    void getAllItems()  throws Exception {
+    void getAllItems() throws Exception {
         //GIVEN
         repo.deleteAll();
         //WHEN & THEN
         mvc.perform(get("/api/item"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-                                            []
-                                            """));
+                        []
+                        """));
     }
 
     @Test
@@ -88,7 +88,7 @@ class ItemControllerIntegrationTest {
     @Test
     void getItemById_getItemWithId1_whenItemWithId1isRequested() throws Exception {
 
-        Item newItem = new Item("1","testName","testImg","testDescription",ItemCategory.TOOL,ItemStatus.TO_LEND);
+        Item newItem = new Item("1", "testName", "testImg", "testDescription", ItemCategory.TOOL, ItemStatus.TO_LEND);
 
         repo.deleteAll();
         repo.save(newItem);
@@ -96,29 +96,69 @@ class ItemControllerIntegrationTest {
         mvc.perform(get("/api/item/{id}", 1))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-                {
-                "id":"1",
-                "name":"testName",
-                "img":"testImg",
-                "description":"testDescription",
-                "category":"TOOL",
-                "status":"TO_LEND"
-                }
-                
-                """));
+                        {
+                        "id":"1",
+                        "name":"testName",
+                        "img":"testImg",
+                        "description":"testDescription",
+                        "category":"TOOL",
+                        "status":"TO_LEND"
+                        }
+                        
+                        """));
     }
 
     @Test
     void deleteItem() throws Exception {
         //GIVEN
         repo.deleteAll();
-        Item newItem = new Item("1","testname","testImg","testDescription",ItemCategory.TOOL,ItemStatus.TO_LEND);
+        Item newItem = new Item("1", "testname", "testImg", "testDescription", ItemCategory.TOOL, ItemStatus.TO_LEND);
         repo.save(newItem);
 
         //WHEN
         mvc.perform(delete("/api/item/1"))
-        //THEN
+                //THEN
                 .andExpect(status().isOk());
         Assertions.assertFalse(repo.existsById("1"));
+    }
+
+    @Test
+    void updateItem_updateTool() throws Exception {
+        //GIVEN
+        Item newItem = new Item("1", "testName", "testImg", "testDescription", ItemCategory.TOOL, ItemStatus.TO_LEND);
+        repo.deleteAll();
+        repo.save(newItem);
+
+        //WHEN
+        mvc.perform(put("/api/item/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                                         {
+                                                         "id": "1",
+                                                         "name": "testName",
+                                                         "img": "testImg",
+                                                         "description": "testDescription",
+                                                         "category": "TOOL",
+                                                         "status": "TO_SELL"
+                                                         }
+                                """)
+                )
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                                                         {
+                                                         "id": "1",
+                                                         "name": "testName",
+                                                         "img": "testImg",
+                                                         "description": "testDescription",
+                                                         "category": "TOOL",
+                                                         "status": "TO_SELL"
+                                                         }
+                                """
+
+                        )
+                );
+        Item savedItem = repo.findById("1").orElseThrow();
+        Assertions.assertEquals(ItemStatus.TO_SELL ,savedItem.status());
     }
 }

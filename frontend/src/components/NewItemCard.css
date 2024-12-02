@@ -1,26 +1,41 @@
 .newItemForm{
-    border-radius: 5px;
     display: flex;
-    flex-direction: column;   /* Align children (labels + inputs) vertically */
-    align-items: center;  /* Align items to the left */
-    justify-content: center; /* Start from the top */
-    gap: 10px;                /* Space between each form row */
-    padding: 20px;            /* Optional padding around the form */
-    border: 1px solid hsl(0,0%, 80%);
+    justify-content: center;
+    align-items: center;
+    font-family: Arial,sans-serif;
+    border-radius: 5px;
+    margin: auto;
+    flex-direction: column;
+    gap: 10px;
+
+
 
 }
 h2{
     align-items: center;
 }
 
-.delete-item-container{
-    margin: 1px;
+.manage-container{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid hsl(0,0%, 80%);
+    margin: auto;
+
+    width: 400px;
+}
+
+.button-item-container{
+    margin: auto;
     display: flex;
     border-radius: 5px;
     border: 1px solid hsl(0,0%, 80%);
     background-color: hsla(100,10%,10%,10%);
     flex-direction: column;
-
+    width: 300px;
+    cursor: pointer;
+}
+.button-item-container:hover{
+    background-color: hsla(50,10%,10%,40%);
 }
 
 .select-item-container{

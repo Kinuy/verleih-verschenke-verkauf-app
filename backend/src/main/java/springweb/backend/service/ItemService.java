@@ -49,4 +49,18 @@ public class ItemService {
         }
         itemRepository.deleteById(id);
     }
+
+    public Item updateItem(String id,Item item) {
+        if(!itemRepository.existsById(id)){
+            throw new ItemException("Item with id " + id + " not found");
+        }
+        Item itemToUpdate = new Item(
+                id,
+                item.name(),
+                item.img(),
+                item.description(),
+                item.category(),
+                item.status());
+        return itemRepository.save(itemToUpdate);
+    }
 }

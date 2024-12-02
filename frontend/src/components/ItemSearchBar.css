@@ -1,15 +1,17 @@
 .search-bar {
+    margin: auto auto 5px;
+    width: 400px;
     display: flex;
     justify-content: center;
-    margin: 20px 2px;
+
 }
 
 .search-input {
-    width: 300px;
-    padding: 10px;
+
     font-size: 16px;
     border-radius: 4px;
     outline: none;
+    padding: 5px 5px;
 }
 
 .search-input:hover {

@@ -1,11 +1,12 @@
 .navbar{
 
-    margin: 1px;
+    margin: auto;
     padding: 1px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
+    width: 400px;
 }
 
 

@@ -87,6 +87,24 @@ class ItemServiceTest {
         verify(itemRepository).existsById("1");
     }
 
+    @Test
+    void updateItem(){
+        //GIVEN
+        Item modItem = new Item("1","test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_SELL);
+
+        when(itemRepository.existsById("1")).thenReturn(true);
+        when(itemRepository.save(any(Item.class))).thenReturn(modItem);
+
+        //WHEN
+        Item expected = itemService.updateItem("1",modItem);
+
+        //THEN
+        assertEquals(modItem,expected);
+        verify(itemRepository,times(1)).existsById("1");
+        verify(itemRepository,times(1)).save(modItem);
+
+    }
+
 }
 
 
