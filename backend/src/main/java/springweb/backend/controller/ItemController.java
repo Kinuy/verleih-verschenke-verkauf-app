@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import springweb.backend.model.Item;
 import springweb.backend.model.ItemDto;
+import springweb.backend.service.ImageService;
 import springweb.backend.service.ItemService;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,7 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
+    private final ImageService imageService;
 
 
     @GetMapping
@@ -22,8 +26,16 @@ public class ItemController {
     }
 
     @PostMapping
-    public Item createItem(@RequestBody ItemDto itemDTO) {
-        return itemService.createItem(itemDTO);
+    public Item createItem(
+        @RequestPart("itemDto") ItemDto itemDto,
+        @RequestPart("image") MultipartFile image) throws IOException {
+
+        String imgUrl = null;
+        if (image != null && !image.isEmpty()) {
+            imgUrl = imageService.uploadImage(image);
+        }
+
+        return itemService.createItem(itemDto,imgUrl);
     }
 
     @GetMapping("/{id}")
@@ -37,14 +49,30 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
-    public Item updateItem(@PathVariable String id, @RequestBody ItemDto itemDTO) {
-        Item item = new Item(
+    public Item updateItem(@PathVariable String id, @RequestPart("itemDTO") ItemDto itemDTO,
+                           @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
+
+        Item item = itemService.getItemById(id);
+
+        String newImg;
+        if (image != null && !image.isEmpty()) {
+            if (item.img() != null) {
+                imageService.deleteImage(item.img());
+            }
+            newImg = imageService.uploadImage(image);
+        } else {
+            newImg = item.img();
+        }
+
+
+
+        Item newItem = new Item(
                 id,
                 itemDTO.name(),
-                itemDTO.img(),
+                newImg,
                 itemDTO.description(),
                 itemDTO.category(),
                 itemDTO.status());
-        return itemService.updateItem(id,item);
+        return itemService.updateItem(id,newItem);
     }
 }
