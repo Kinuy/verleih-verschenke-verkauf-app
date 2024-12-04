@@ -26,6 +26,12 @@
 
 }
 
+.itemCard-container .item-card-img-container{
+    height: auto;
+    width: 50px;
+    border-radius: 10px;
+}
+
 p{
     margin: 0;
     padding: 0;
