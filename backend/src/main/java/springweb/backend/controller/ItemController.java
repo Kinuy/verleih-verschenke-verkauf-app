@@ -1,6 +1,7 @@
 package springweb.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import springweb.backend.model.Item;
 import springweb.backend.model.ItemDto;
@@ -26,6 +27,7 @@ public class ItemController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Item createItem(
         @RequestPart("itemDto") ItemDto itemDto,
         @RequestPart("image") MultipartFile image) throws IOException {
