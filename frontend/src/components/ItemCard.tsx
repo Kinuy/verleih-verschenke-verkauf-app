@@ -19,6 +19,7 @@ export default function ItemCard(props: Props) {
         <div className="itemCard-container" onClick={handleClick}>
             <div className="itemCard-tags">
                 <p>{props.item.name}</p>
+                <img className="item-card-img-container" src={props.item.img} alt={"image not found"}/>
             </div>
         </div>
     );

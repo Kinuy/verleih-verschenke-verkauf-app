@@ -18,13 +18,13 @@ public class ItemService {
     private final IdService idService;
 
 
-    public Item createItem(ItemDto itemDTO) {
+    public Item createItem(ItemDto itemDTO, String imgUrl) {
         String id = idService.generateId();
 
         Item itemToSave = new Item(
                 id,
                 itemDTO.name(),
-                itemDTO.img(),
+                imgUrl,
                 itemDTO.description(),
                 itemDTO.category(),
                 itemDTO.status()
