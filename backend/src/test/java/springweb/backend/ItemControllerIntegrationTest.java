@@ -61,7 +61,7 @@ class ItemControllerIntegrationTest {
     }
 
     @Test
-    void postItem() throws Exception {
+    void postItem_whenItemPost_ThenReturnItemCreated() throws Exception {
         // GIVEN
         repo.deleteAll();
         Uploader mockUploader = mock(Uploader.class);
