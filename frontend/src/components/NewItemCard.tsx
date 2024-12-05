@@ -179,15 +179,24 @@ export default function NewItemCard(props: Props) {
                 </label>
                 <label>
                     <div className="image-dialogue-container">
+
+{/*
                         {image && <img src={URL.createObjectURL(image)} alt={"image not found"}/>}
-                        <input style={{display:"none"}}
+*/}
+
+
+                        {itemImg && <img src={itemImg} alt={"image not found"}/>}
+
+                        <input style={{display: "none"}}
                                id={"file-input"}
                             type={"file"}
                             onChange={onImageFileChange}
                         />
                         <div className="load-img">
                             {image ? <label className="load-img-message">{image.name}</label> :
-                                <label className="load-img-message">no image loaded</label>}
+                                <label className="load-img-message">
+                                    no new image loaded
+                                </label>}
                             <label className="load-img-button" htmlFor={"file-input"}>
                                 load image
                             </label>
