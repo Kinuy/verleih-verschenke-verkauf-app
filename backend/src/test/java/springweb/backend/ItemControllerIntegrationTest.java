@@ -1,13 +1,18 @@
 package springweb.backend;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.Uploader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import springweb.backend.model.Item;
 import springweb.backend.model.ItemCategory;
 import springweb.backend.model.ItemStatus;
@@ -15,7 +20,13 @@ import springweb.backend.repository.ItemRepository;
 import org.springframework.http.MediaType;
 
 import java.util.List;
+import java.util.Map;
 
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,6 +35,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @AutoConfigureMockRestServiceServer
 class ItemControllerIntegrationTest {
+
+    @MockBean
+    private Cloudinary cloudinary;
 
     @Autowired
     MockMvc mvc;
@@ -47,23 +61,26 @@ class ItemControllerIntegrationTest {
     }
 
     @Test
-    void postItem() throws Exception {
+    void postItem_whenItemPost_ThenReturnItemCreated() throws Exception {
         // GIVEN
         repo.deleteAll();
+        Uploader mockUploader = mock(Uploader.class);
+        when(mockUploader.upload(any(), anyMap())).thenReturn(Map.of("secure_url", "testImgUrl"));
+        when(cloudinary.uploader()).thenReturn(mockUploader);
 
         // WHEN
-        mvc.perform(post("/api/item")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("""
+        mvc.perform(MockMvcRequestBuilders.multipart("/api/item")
+                .file(new MockMultipartFile("image", "test.jpg", "image/jpeg", "test image".getBytes()))
+                .file(new MockMultipartFile("itemDto", "", "application/json", """
                          {
                          "name": "testName",
-                         "img": "testImg",
+                         "img": "testImgUrl",
                          "description": "testDescription",
                          "category": "TOOL",
                          "status": "TO_LEND"
                          }
-                        """)
-        ).andExpect(status().isOk());
+                        """.getBytes())))
+                .andExpect(status().isCreated());
 
         // THEN
         List<Item> allItems = repo.findAll();
@@ -76,7 +93,7 @@ class ItemControllerIntegrationTest {
                 .isEqualTo(new Item(
                         null,
                         "testName",
-                        "testImg",
+                        "testImgUrl",
                         "testDescription",
                         ItemCategory.TOOL,
                         ItemStatus.TO_LEND
@@ -115,6 +132,7 @@ class ItemControllerIntegrationTest {
         Item newItem = new Item("1", "testname", "testImg", "testDescription", ItemCategory.TOOL, ItemStatus.TO_LEND);
         repo.save(newItem);
 
+
         //WHEN
         mvc.perform(delete("/api/item/1"))
                 //THEN
@@ -125,31 +143,40 @@ class ItemControllerIntegrationTest {
     @Test
     void updateItem_updateTool() throws Exception {
         //GIVEN
-        Item newItem = new Item("1", "testName", "testImg", "testDescription", ItemCategory.TOOL, ItemStatus.TO_LEND);
+        Item newItem = new Item("1", "testName", "testImgUrl", "testDescription", ItemCategory.TOOL, ItemStatus.TO_LEND);
         repo.deleteAll();
         repo.save(newItem);
 
+        Uploader mockUploader = mock(Uploader.class);
+        when(mockUploader.upload(any(), anyMap())).thenReturn(Map.of("secure_url", "testImgUrl"));
+        when(cloudinary.uploader()).thenReturn(mockUploader);
+
         //WHEN
-        mvc.perform(put("/api/item/1")
+/*        mvc.perform(put("/api/item/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
+                        .content("""*/
+
+        mvc.perform(MockMvcRequestBuilders.multipart("/api/item/1")
+                        .file(new MockMultipartFile("image", "test.jpg", "image/jpeg", "test image".getBytes()))
+                        .file(new MockMultipartFile("itemDTO", "", "application/json", """                                                         
                                                          {
                                                          "id": "1",
                                                          "name": "testName",
-                                                         "img": "testImg",
+                                                         "img": "testImgUrl",
                                                          "description": "testDescription",
                                                          "category": "TOOL",
                                                          "status": "TO_SELL"
                                                          }
-                                """)
-                )
+                        """.getBytes()))
+                        .contentType("multipart/form-data")
+                        .with(request -> { request.setMethod("PUT"); return request; }))
                 //THEN
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                                                          {
                                                          "id": "1",
                                                          "name": "testName",
-                                                         "img": "testImg",
+                                                         "img": "testImgUrl",
                                                          "description": "testDescription",
                                                          "category": "TOOL",
                                                          "status": "TO_SELL"
@@ -160,5 +187,6 @@ class ItemControllerIntegrationTest {
                 );
         Item savedItem = repo.findById("1").orElseThrow();
         Assertions.assertEquals(ItemStatus.TO_SELL ,savedItem.status());
+        Assertions.assertEquals("testImgUrl", savedItem.img());
     }
 }

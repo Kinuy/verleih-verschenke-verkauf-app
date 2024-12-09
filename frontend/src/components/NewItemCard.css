@@ -52,3 +52,51 @@ button{
     border-radius: 5px;
     background-color: hsla(0,0%,0%,0%);
 }
+
+.image-dialogue-container{
+
+    border: 1px solid hsl(0,0%, 80%);
+    border-radius: 5px;
+    padding: 2px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+img{
+    height: auto;
+    width: 200px;
+}
+
+.load-img{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+
+
+
+}
+.load-img-message{
+    font-size: xx-small;
+    text-align: center;
+    margin: auto;
+    padding: 2px;
+    width: 150px;
+    align-content: center;
+}
+
+.load-img-button{
+    text-align: center;
+    margin: auto;
+    padding: 2px;
+    border: 1px solid hsl(0,0%, 80%);
+    cursor: pointer;
+    height: 20px;
+    width: 110px;
+    background-color: hsla(0,0%,0%,0%);
+    border-radius: 5px;
+
+}
+.load-img-button:hover{
+    background-color: hsla(100,0%,0%,50%);
+}

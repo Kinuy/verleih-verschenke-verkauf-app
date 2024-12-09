@@ -1,5 +1,5 @@
 import {Item} from "../models/Item.ts";
-import {FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import axios from "axios";
 import "./NewItemCard.css";
 import {ItemCategory} from "../models/ItemCategory.ts";
@@ -19,7 +19,7 @@ export default function NewItemCard(props: Props) {
     const [itemCategory, setItemCategory] = useState<ItemCategory>();
     const [itemStatus, setItemStatus] = useState<ItemStatus>();
     const [id, setId] = useState<string>("")
-
+    const [image, setImage] = useState<File | null>(null)
 
     function manageItem(event: FormEvent<HTMLFormElement>){
         event.preventDefault()
@@ -37,6 +37,12 @@ export default function NewItemCard(props: Props) {
             return;
         }
 
+        const data: FormData = new FormData();
+
+        if (image) {
+            data.append("image", image);
+        }
+
         const savedItem: ItemDto = {
             name: itemName || 'Default Name',
             img: itemImg || 'default/url',
@@ -45,17 +51,20 @@ export default function NewItemCard(props: Props) {
             status: itemStatus || 'TO_SELL'
         };
 
-        axios.post("/api/item", savedItem)
-            .then(() => {
-                props.updateList();
+        data.append("itemDto", new Blob([JSON.stringify(savedItem)], {'type': "application/json"}))
+
+        axios
+            .post(`/api/item`, data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
             })
-            .catch(error => {
-                console.error("Error adding item:", error);
+            .then(() => {props.updateList()})
+            .catch((error) => {
+                console.error("Error saving image:", error);
             });
 
-
     }
-
 
     function deleteItem() {
         const checkDelete = window.confirm("Do you really want to delete this item?")
@@ -91,22 +100,44 @@ export default function NewItemCard(props: Props) {
 
     function updateItemDetails(id:string){
 
+        const data: FormData = new FormData();
+
+        if (image) {
+            data.append("image", image);
+
+        }
+
         fetchItemDetails(id);
 
         const itemData = {
+            id:id,
             name: itemName,
             image: itemImg,
             description: itemDescription,
             category: itemCategory,
             status: itemStatus,
         };
+        data.append("itemDTO", new Blob([JSON.stringify(itemData)], {'type': "application/json"}))
 
-        axios.put(`api/item/${id}`, itemData)
-            .then(props.updateList)
-            .catch((error=>{console.error(error)}))
+        axios
+            .put(`/api/item/${id}`, data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            })
+            .then(()=>{props.updateList()})
+            .catch((error) => {
+                console.error("Error saving image:", error);
+            });
 
     }
 
+    function onImageFileChange(e: ChangeEvent<HTMLInputElement>) {
+        e.preventDefault();
+        if (e.target.files) {
+            setImage(e.target.files[0]);
+        }
+    }
     useEffect(() => {
         props.updateList();
     }, []);
@@ -147,13 +178,30 @@ export default function NewItemCard(props: Props) {
                     />
                 </label>
                 <label>
-                    <p>Image:</p>
-                    <input
-                        type="text"
-                        value={itemImg}
-                        placeholder="image"
-                        onChange={(e) => setItemImg(e.target.value)}
-                    />
+                    <div className="image-dialogue-container">
+
+{/*
+                        {image && <img src={URL.createObjectURL(image)} alt={"image not found"}/>}
+*/}
+
+
+                        {itemImg && <img src={itemImg} alt={"image not found"}/>}
+
+                        <input style={{display: "none"}}
+                               id={"file-input"}
+                            type={"file"}
+                            onChange={onImageFileChange}
+                        />
+                        <div className="load-img">
+                            {image ? <label className="load-img-message">{image.name}</label> :
+                                <label className="load-img-message">
+                                    no new image loaded
+                                </label>}
+                            <label className="load-img-button" htmlFor={"file-input"}>
+                                load image
+                            </label>
+                        </div>
+                    </div>
                 </label>
                 <label>
                     <p>Description:</p>

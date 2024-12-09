@@ -46,15 +46,15 @@ class ItemServiceTest {
     @Test
     void saveNewItem_shouldReturnItem_whenGivenDtoItem() {
         //GIVEN
-        Item expected = new Item("1","test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND);
+        Item expected = new Item("1","test-name","test-url","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND);
         ItemDto dto = new ItemDto("test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND);
-
+        String url = "test-url";
 
         when(itemRepository.save(expected)).thenReturn(expected);
         when(idService.generateId()).thenReturn("1");
 
         //WHEN
-        Item actual =itemService.createItem(dto);
+        Item actual =itemService.createItem(dto,url);
         //THEN
         verify(itemRepository).save(expected);
         assertEquals(expected, actual);
