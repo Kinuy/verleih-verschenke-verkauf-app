@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Item} from "../models/Item.ts";
+import MapCard from "./MapCard.tsx";
 
 const initVal:Item = {
     "id":"",
@@ -34,6 +35,7 @@ export default function ItemDetails() {
     return (
         <div className="item-detail-container">
             <p>{item.name}</p>
+            <MapCard/>
         </div>
     );
 };
