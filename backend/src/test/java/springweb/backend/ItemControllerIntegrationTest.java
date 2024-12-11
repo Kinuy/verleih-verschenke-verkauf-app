@@ -78,7 +78,7 @@ class ItemControllerIntegrationTest {
                          "description": "testDescription",
                          "category": "TOOL",
                          "status": "TO_LEND",
-                         "geocode":"[48.8566, 2.3522]",
+                         "geocode":[48.8566, 2.3522],
                          "owner":"me"
                          }
                         """.getBytes())))
@@ -195,8 +195,8 @@ class ItemControllerIntegrationTest {
                                                      "description": "testDescription",
                                                      "category": "TOOL",
                                                      "status": "TO_SELL",
-                                                    "geocode":[48.8566, 2.3522],
-                                                    "owner":"me",
+                                                     "geocode": [48.8566, 2.3522],
+                                                     "owner": "me"
                                                     }
                         """.getBytes()))
                         .contentType("multipart/form-data")
@@ -211,8 +211,8 @@ class ItemControllerIntegrationTest {
                                                          "description": "testDescription",
                                                          "category": "TOOL",
                                                          "status": "TO_SELL",
-                                                    "geocode":[48.8566, 2.3522],
-                                                    "owner":"me",
+                                                         "geocode": [48.8566, 2.3522],
+                                                         "owner": "me"
                                                          }
                                 """
 
