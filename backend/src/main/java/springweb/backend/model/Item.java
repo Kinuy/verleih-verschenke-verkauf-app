@@ -14,6 +14,8 @@ public record Item(
         String img,
         String description,
         ItemCategory category,
-        ItemStatus status
+        ItemStatus status,
+        double[] geocode,
+        String owner
 ) {
 }
