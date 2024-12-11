@@ -27,7 +27,9 @@ public class ItemService {
                 imgUrl,
                 itemDTO.description(),
                 itemDTO.category(),
-                itemDTO.status()
+                itemDTO.status(),
+                itemDTO.geocode(),
+                itemDTO.owner()
                 );
 
         return itemRepository.save(itemToSave);
@@ -60,7 +62,9 @@ public class ItemService {
                 item.img(),
                 item.description(),
                 item.category(),
-                item.status());
+                item.status(),
+                item.geocode(),
+                item.owner());
         return itemRepository.save(itemToUpdate);
     }
 }
