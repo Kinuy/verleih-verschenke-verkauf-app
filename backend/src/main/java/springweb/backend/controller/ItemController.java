@@ -74,7 +74,9 @@ public class ItemController {
                 newImg,
                 itemDTO.description(),
                 itemDTO.category(),
-                itemDTO.status());
+                itemDTO.status(),
+                itemDTO.geocode(),
+                itemDTO.owner());
         return itemService.updateItem(id,newItem);
     }
 }

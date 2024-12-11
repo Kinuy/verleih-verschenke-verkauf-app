@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Item} from "../models/Item.ts";
+import MapCard from "./MapCard.tsx";
 
 const initVal:Item = {
     "id":"",
@@ -10,7 +11,9 @@ const initVal:Item = {
     "img":"",
     "description":"",
     "category":"TOOL",
-    "status":"TO_LEND"
+    "status":"TO_LEND",
+    "geocode":[0,0],
+    "owner":""
 }
 
 export default function ItemDetails() {
@@ -33,7 +36,14 @@ export default function ItemDetails() {
 
     return (
         <div className="item-detail-container">
-            <p>{item.name}</p>
+            <div className="item-detail-card-container">
+                <img src={item.img} alt="no image found"/>
+                <p className="item-description-container">{item.description}</p>
+            </div>
+            <div className="item-detail-map-container">
+            <MapCard item={item}/>
+            </div>
         </div>
+
     );
 };

@@ -1,17 +1,19 @@
 .navbar{
 
-    margin: auto;
+    margin: 20px;
     padding: 1px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
     width: 400px;
+    border-radius: 5px;
+    border: 1px solid hsl(0,0%, 80%);
+    background-color: hsla(152, 100%, 50%, 0.4);
 }
 
 
 .navbar-link{
-    margin: 5px;
     color: black;
     padding: 5px;
     font-family: 'Arial', sans-serif;
@@ -21,7 +23,6 @@
 
 }
 .navbar-link:hover{
-    margin: 5px;
     padding: 5px;
     background-color: hsla(1,1%,1%,10%);
     border-radius: 5px;

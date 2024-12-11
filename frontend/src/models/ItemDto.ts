@@ -6,5 +6,7 @@ export type ItemDto = {
     img: string,
     description: string,
     category: ItemCategory,
-    status: ItemStatus
+    status: ItemStatus,
+    geocode: [number,number],
+    owner: string
 }

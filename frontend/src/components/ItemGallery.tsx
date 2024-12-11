@@ -44,8 +44,9 @@ export default function ItemGallery(props:Props) {
 
     return (
         <div>
-            <ItemSearchBar onSearch={filterItems}/>
+
             <div className= "ItemGallery-container">
+                <ItemSearchBar onSearch={filterItems}/>
             {
                 filteredItems.map((element)=>{
                     if (element.status === "TO_SELL") {

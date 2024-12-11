@@ -1,6 +1,6 @@
 .itemCard-container{
 
-    border-radius: 5px;
+    border-radius: 50px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -8,8 +8,6 @@
     align-items: center;
     width: 100px;
     height: 100px;
-
-
     cursor: pointer;
     transition: background-color 0.5s ease;
     box-sizing: border-box;
@@ -29,7 +27,7 @@
 .itemCard-container .item-card-img-container{
     height: auto;
     width: 50px;
-    border-radius: 10px;
+    border-radius: 50px;
 }
 
 p{

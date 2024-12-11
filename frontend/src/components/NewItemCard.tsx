@@ -20,6 +20,10 @@ export default function NewItemCard(props: Props) {
     const [itemStatus, setItemStatus] = useState<ItemStatus>();
     const [id, setId] = useState<string>("")
     const [image, setImage] = useState<File | null>(null)
+    const [itemGeocode, setItemGeocode] = useState<[number,number]>([0,0]);
+    const [geoCodeLat, setGeoCodeLat] = useState<number>(0);
+    const [geoCodeLong, setGeoCodeLong] = useState<number>(0);
+    const [itemOwner, setItemOwner] = useState<string>("");
 
     function manageItem(event: FormEvent<HTMLFormElement>){
         event.preventDefault()
@@ -43,12 +47,16 @@ export default function NewItemCard(props: Props) {
             data.append("image", image);
         }
 
+        setItemGeocode([geoCodeLat,geoCodeLong])
+
         const savedItem: ItemDto = {
             name: itemName || 'Default Name',
             img: itemImg || 'default/url',
             description: itemDescription || 'Default description',
             category: itemCategory || 'TOOL',
-            status: itemStatus || 'TO_SELL'
+            status: itemStatus || 'TO_SELL',
+            geocode: itemGeocode || [0,0],
+            owner: "me"
         };
 
         data.append("itemDto", new Blob([JSON.stringify(savedItem)], {'type': "application/json"}))
@@ -91,6 +99,10 @@ export default function NewItemCard(props: Props) {
                 setItemDescription(response.data.description);
                 setItemCategory(response.data.category);
                 setItemStatus(response.data.status);
+                setItemGeocode(response.data.geocode);
+                setItemOwner(response.data.owner);
+                setGeoCodeLat(response.data.geocode[0])
+                setGeoCodeLong(response.data.geocode[1])
             })
             .catch(error => console.error(error));
 
@@ -107,7 +119,9 @@ export default function NewItemCard(props: Props) {
 
         }
 
-        fetchItemDetails(id);
+        //fetchItemDetails(id);
+
+        setItemGeocode([geoCodeLat,geoCodeLong]);
 
         const itemData = {
             id:id,
@@ -116,6 +130,8 @@ export default function NewItemCard(props: Props) {
             description: itemDescription,
             category: itemCategory,
             status: itemStatus,
+            geocode: itemGeocode,
+            owner: itemOwner
         };
         data.append("itemDTO", new Blob([JSON.stringify(itemData)], {'type': "application/json"}))
 
@@ -138,6 +154,20 @@ export default function NewItemCard(props: Props) {
             setImage(e.target.files[0]);
         }
     }
+
+    const handleGeocodeChangeLat = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setGeoCodeLat(parseFloat(value));
+        setItemGeocode([parseFloat(value),geoCodeLong]);
+    };
+
+    const handleGeocodeChangeLong = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setGeoCodeLong(parseFloat(value));
+        setItemGeocode([geoCodeLat,parseFloat(value)]);
+
+    };
+
     useEffect(() => {
         props.updateList();
     }, []);
@@ -146,7 +176,6 @@ export default function NewItemCard(props: Props) {
         <div className="manage-container">
 
             <form className="newItemForm" onSubmit={manageItem}>
-                <h2>Modify Item</h2>
                 <div className="update-item-container">
                     <select
                         className="select-item-container"
@@ -170,7 +199,7 @@ export default function NewItemCard(props: Props) {
                 </div>
                 <label>
                     <p>Item name:</p>
-                    <input
+                    <input className="input-container"
                         type="text"
                         value={itemName}
                         placeholder={itemName}
@@ -180,7 +209,7 @@ export default function NewItemCard(props: Props) {
                 <label>
                     <div className="image-dialogue-container">
 
-{/*
+                        {/*
                         {image && <img src={URL.createObjectURL(image)} alt={"image not found"}/>}
 */}
 
@@ -189,8 +218,8 @@ export default function NewItemCard(props: Props) {
 
                         <input style={{display: "none"}}
                                id={"file-input"}
-                            type={"file"}
-                            onChange={onImageFileChange}
+                               type={"file"}
+                               onChange={onImageFileChange}
                         />
                         <div className="load-img">
                             {image ? <label className="load-img-message">{image.name}</label> :
@@ -205,7 +234,7 @@ export default function NewItemCard(props: Props) {
                 </label>
                 <label>
                     <p>Description:</p>
-                    <textarea
+                    <textarea className="text-area-container"
                         value={itemDescription}
                         placeholder="description"
                         onChange={(e) => setItemDescription(e.target.value)}
@@ -213,22 +242,50 @@ export default function NewItemCard(props: Props) {
                 </label>
                 <label>
                     <p>Category:</p>
-                    <select value={itemCategory} name="category" id="category-select"
+                    <select value={itemCategory} className="select-container" name="category" id="category-select"
                             onChange={(e) => setItemCategory(e.target.value as ItemCategory)}>
-                        <option value={undefined}>--Choose category--</option>
+                        <option value={undefined}>--Select category--</option>
                         <option value="TOOL">TOOL</option>
                         <option value="MATERIAL">MATERIAL</option>
                     </select>
                 </label>
                 <label>
                     <p>Status:</p>
-                    <select value={itemStatus} className="select-status-container" name="status" id="status-select"
+                    <select value={itemStatus} className="select-container" name="status" id="status-select"
                             onChange={(e) => setItemStatus(e.target.value as ItemStatus)}>
-                        <option value={undefined}>--Choose status--</option>
+                        <option value={undefined}>--Select status--</option>
                         <option className="lend-container" value="TO_LEND">TO_LEND</option>
                         <option className="give-container" value="TO_GIVE_AWAY">TO_GIVE_AWAY</option>
                         <option className="sell-container" value="TO_SELL">TO_SELL</option>
                     </select>
+                </label>
+                <label>
+                    <p>Item Position - Latitude:</p>
+                    <input className="input-container"
+                        type="text"
+                        value={geoCodeLat}
+                        placeholder="latitude"
+                        onChange={handleGeocodeChangeLat}
+                    />
+
+                </label>
+                <label>
+                    <p>Item Position - Longitude:</p>
+                    <input className="input-container"
+                        type="text"
+                        value={geoCodeLong}
+                        placeholder="longitude"
+                        onChange={handleGeocodeChangeLong}
+                    />
+                </label>
+                <label>
+                    <p>Item owner:</p>
+                    <input className="input-container"
+                        type="text"
+                        value={itemOwner}
+                        placeholder={itemOwner}
+                        onChange={(e) => setItemOwner(e.target.value)}
+                    />
                 </label>
                 {
                     (id === "") && <button className="button-item-container">add</button>
