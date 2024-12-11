@@ -77,7 +77,9 @@ class ItemControllerIntegrationTest {
                          "img": "testImgUrl",
                          "description": "testDescription",
                          "category": "TOOL",
-                         "status": "TO_LEND"
+                         "status": "TO_LEND",
+                         "geocode":"[48.8566, 2.3522]",
+                         "owner":"me"
                          }
                         """.getBytes())))
                 .andExpect(status().isCreated());
@@ -96,8 +98,9 @@ class ItemControllerIntegrationTest {
                         "testImgUrl",
                         "testDescription",
                         ItemCategory.TOOL,
-                        ItemStatus.TO_LEND
-
+                        ItemStatus.TO_LEND,
+                        new double[]{48.8566, 2.3522},
+                        "me"
 
                 ));
     }
@@ -105,7 +108,15 @@ class ItemControllerIntegrationTest {
     @Test
     void getItemById_getItemWithId1_whenItemWithId1isRequested() throws Exception {
 
-        Item newItem = new Item("1", "testName", "testImg", "testDescription", ItemCategory.TOOL, ItemStatus.TO_LEND);
+        Item newItem = new Item("1",
+                "testName",
+                "testImg",
+                "testDescription",
+                ItemCategory.TOOL,
+                ItemStatus.TO_LEND,
+                new double[]{48.8566, 2.3522},
+                "me"
+                );
 
         repo.deleteAll();
         repo.save(newItem);
@@ -119,7 +130,9 @@ class ItemControllerIntegrationTest {
                         "img":"testImg",
                         "description":"testDescription",
                         "category":"TOOL",
-                        "status":"TO_LEND"
+                        "status":"TO_LEND",
+                        "geocode":[48.8566, 2.3522],
+                        "owner":"me"
                         }
                         
                         """));
@@ -129,7 +142,15 @@ class ItemControllerIntegrationTest {
     void deleteItem() throws Exception {
         //GIVEN
         repo.deleteAll();
-        Item newItem = new Item("1", "testname", "testImg", "testDescription", ItemCategory.TOOL, ItemStatus.TO_LEND);
+        Item newItem = new Item("1",
+                "testname",
+                "testImg",
+                "testDescription",
+                ItemCategory.TOOL,
+                ItemStatus.TO_LEND,
+                new double[]{48.8566, 2.3522},
+                "me"
+        );
         repo.save(newItem);
 
 
@@ -143,7 +164,15 @@ class ItemControllerIntegrationTest {
     @Test
     void updateItem_updateTool() throws Exception {
         //GIVEN
-        Item newItem = new Item("1", "testName", "testImgUrl", "testDescription", ItemCategory.TOOL, ItemStatus.TO_LEND);
+        Item newItem = new Item("1",
+                "testName",
+                "testImgUrl",
+                "testDescription",
+                ItemCategory.TOOL,
+                ItemStatus.TO_LEND,
+                new double[]{48.8566, 2.3522},
+                "me"
+        );
         repo.deleteAll();
         repo.save(newItem);
 
@@ -159,14 +188,16 @@ class ItemControllerIntegrationTest {
         mvc.perform(MockMvcRequestBuilders.multipart("/api/item/1")
                         .file(new MockMultipartFile("image", "test.jpg", "image/jpeg", "test image".getBytes()))
                         .file(new MockMultipartFile("itemDTO", "", "application/json", """                                                         
-                                                         {
-                                                         "id": "1",
-                                                         "name": "testName",
-                                                         "img": "testImgUrl",
-                                                         "description": "testDescription",
-                                                         "category": "TOOL",
-                                                         "status": "TO_SELL"
-                                                         }
+                                                     {
+                                                     "id": "1",
+                                                     "name": "testName",
+                                                     "img": "testImgUrl",
+                                                     "description": "testDescription",
+                                                     "category": "TOOL",
+                                                     "status": "TO_SELL",
+                                                    "geocode":[48.8566, 2.3522],
+                                                    "owner":"me",
+                                                    }
                         """.getBytes()))
                         .contentType("multipart/form-data")
                         .with(request -> { request.setMethod("PUT"); return request; }))
@@ -179,7 +210,9 @@ class ItemControllerIntegrationTest {
                                                          "img": "testImgUrl",
                                                          "description": "testDescription",
                                                          "category": "TOOL",
-                                                         "status": "TO_SELL"
+                                                         "status": "TO_SELL",
+                                                    "geocode":[48.8566, 2.3522],
+                                                    "owner":"me",
                                                          }
                                 """
 
