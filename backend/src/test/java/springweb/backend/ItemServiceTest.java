@@ -46,8 +46,9 @@ class ItemServiceTest {
     @Test
     void saveNewItem_shouldReturnItem_whenGivenDtoItem() {
         //GIVEN
-        Item expected = new Item("1","test-name","test-url","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND,new double[]{48.8566, 2.3522}, "me");
-        ItemDto dto = new ItemDto("test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND,new double[]{48.8566, 2.3522}, "me");
+        double [] geocode = {48.8566, 2.3522};
+        Item expected = new Item("1","test-name","test-url","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND,geocode, "me");
+        ItemDto dto = new ItemDto("test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND,geocode, "me");
         String url = "test-url";
 
         when(itemRepository.save(expected)).thenReturn(expected);
