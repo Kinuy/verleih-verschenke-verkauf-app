@@ -15,10 +15,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import springweb.backend.model.AppUser;
-import springweb.backend.model.Item;
-import springweb.backend.model.ItemCategory;
-import springweb.backend.model.ItemStatus;
+import springweb.backend.model.*;
 import springweb.backend.repository.AppUserRepository;
 import springweb.backend.repository.ItemRepository;
 import org.springframework.http.MediaType;
@@ -80,7 +77,7 @@ class ItemControllerIntegrationTest {
                 "testId",
                 "testUserName",
                 "testPwd",
-                "testRole",
+                AppUserRole.USER,
                 List.of("testItem")
         );
         userRepo.save(user);
