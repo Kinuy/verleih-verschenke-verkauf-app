@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {AppUser} from "../models/AppUser.ts";
+import {useNavigate} from "react-router";
 
 type Props = {
     updateUser: (appUser: AppUser)=>void
@@ -12,6 +13,7 @@ export default function AccountLogin(props: Props) {
 
     const [user, setUser] = useState<{ id: string, username:string,role:string } | undefined>()
 
+    const navigate = useNavigate();
 
     const [accountData, setAccountData] = useState<{ username: string, password: string }>({username: "", password: ""})
 
@@ -25,6 +27,7 @@ export default function AccountLogin(props: Props) {
             .then((response) => {
                 props.updateUser(response.data)
                 setUser(response.data)
+                navigate("/");
             })
     }
 
