@@ -37,11 +37,18 @@ export default function ItemDetails() {
     return (
         <div className="item-detail-container">
             <div className="item-detail-card-container">
-                <img src={item.img} alt="no image found"/>
-                <p className="item-description-container">{item.description}</p>
+                <img className="item-detail-img-container" src={item.img} alt="no image found"/>
+                <ul className="item-detail-content-container">
+                    <li>Name: {item.name}</li>
+                    <li>Owner: {item.owner}</li>
+                    <li>Category: {item.category}</li>
+                    <li>Status: {item.status}</li>
+                </ul>
+                <p className="item-description-container">Description: {item.description}</p>
             </div>
+
             <div className="item-detail-map-container">
-            <MapCard item={item}/>
+                <MapCard item={item}/>
             </div>
         </div>
 
