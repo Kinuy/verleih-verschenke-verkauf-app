@@ -2,6 +2,7 @@ package springweb.backend.controller;
 
 import com.cloudinary.api.exceptions.BadRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class AppUserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public AppUserResponse register(@RequestBody AppUserRegisterDto appUserRegisterDto) throws BadRequest {
         if(appUserService.userExistsByUsername(appUserRegisterDto.username())){
             throw new BadRequest("Username already exists");
