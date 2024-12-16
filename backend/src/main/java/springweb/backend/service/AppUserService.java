@@ -9,7 +9,6 @@ import springweb.backend.model.AppUserRole;
 import springweb.backend.repository.AppUserRepository;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -19,10 +18,6 @@ public class AppUserService{
     private final AppUserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
 
-    public AppUser getUserById(String id) {
-        return userRepo.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("User with id: " + id + " does not exist!"));
-    }
 
     public AppUser addUser(AppUserRegisterDto appUserRegisterDto) {
         AppUser appUser = new AppUser(null,

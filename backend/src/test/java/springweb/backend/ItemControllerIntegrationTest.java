@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import springweb.backend.model.*;
 import springweb.backend.repository.AppUserRepository;
 import springweb.backend.repository.ItemRepository;
-import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,9 +49,6 @@ class ItemControllerIntegrationTest {
 
     @Autowired
     AppUserRepository userRepo;
-
-    @Autowired
-    MockRestServiceServer mockRestServiceServer;
 
     @BeforeEach
     void setUp() {
