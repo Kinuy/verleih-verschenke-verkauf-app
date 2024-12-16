@@ -20,7 +20,7 @@ import {AppUser} from "./models/AppUser.ts";
 
 export default function App() {
 
-    const [user, setUser] = useState<AppUser | undefined>(undefined)
+    const [user, setUser] = useState<AppUser>()
     const [items, setItems] = useState<Item[]>([])
 
     //document.title = "StuffLoop";

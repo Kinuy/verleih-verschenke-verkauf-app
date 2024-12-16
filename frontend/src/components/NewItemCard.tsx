@@ -10,7 +10,7 @@ import {AppUser} from "../models/AppUser.ts";
 type Props = {
     updateList: () => void;
     items:Item[];
-    user: AppUser;
+    user?: AppUser | undefined;
 }
 
 export default function NewItemCard(props: Props) {
@@ -133,7 +133,7 @@ export default function NewItemCard(props: Props) {
             category: itemCategory,
             status: itemStatus,
             geocode: itemGeocode,
-            owner: props.user.username
+            owner: props.user?.username
         };
         data.append("itemDTO", new Blob([JSON.stringify(itemData)], {'type': "application/json"}))
 
@@ -284,8 +284,8 @@ export default function NewItemCard(props: Props) {
                     <p>Item owner:</p>
                     <input className="input-container"
                         type="text"
-                        value={props.user.username}
-                        placeholder={props.user.username}
+                        value={props.user?.username}
+                        placeholder={props.user?.username}
                         // onChange={(e) => setItemOwner(e.target.value)}
                     />
                 </label>
