@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import springweb.backend.model.AppUserRole;
 import springweb.backend.repository.AppUserRepository;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
@@ -26,12 +27,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(a->a
-                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/item/**").authenticated()
-                        .anyRequest().permitAll())
-                .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .authorizeHttpRequests(a->a
+                        .requestMatchers("/api/admin/**").hasRole(AppUserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.POST, "/api/item/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/item/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/item/**").authenticated()
+                        .anyRequest().permitAll())
                 .logout(l->l.logoutSuccessUrl(appUrl))
                 .httpBasic(c -> {
                     c.authenticationEntryPoint((request, response, authException) -> response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase()));
