@@ -3,6 +3,7 @@ package springweb.backend;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Uploader;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
@@ -10,12 +11,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import springweb.backend.model.AppUser;
 import springweb.backend.model.Item;
 import springweb.backend.model.ItemCategory;
 import springweb.backend.model.ItemStatus;
+import springweb.backend.repository.AppUserRepository;
 import springweb.backend.repository.ItemRepository;
 import org.springframework.http.MediaType;
 
@@ -48,7 +52,41 @@ class ItemControllerIntegrationTest {
     ItemRepository repo;
 
     @Autowired
+    AppUserRepository userRepo;
+
+    @Autowired
     MockRestServiceServer mockRestServiceServer;
+
+    @BeforeEach
+    void setUp() {
+        repo.deleteAll();
+        userRepo.deleteAll();
+
+        List<Double> geoList = new ArrayList<>(Arrays.asList(48.8566, 2.3522));
+
+        Item newItem = new Item("1",
+                "testName",
+                "testImg",
+                "testDescription",
+                ItemCategory.TOOL,
+                ItemStatus.TO_LEND,
+                geoList,
+                "me"
+        );
+
+        repo.save(newItem);
+
+        AppUser user = new AppUser(
+                "testId",
+                "testUserName",
+                "testPwd",
+                "testRole",
+                List.of("testItem")
+        );
+        userRepo.save(user);
+
+    }
+
 
     @Test
     void getAllItems() throws Exception {
@@ -63,6 +101,7 @@ class ItemControllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser(username = "testUserName")
     void postItem_whenItemPost_ThenReturnItemCreated() throws Exception {
         // GIVEN
 
