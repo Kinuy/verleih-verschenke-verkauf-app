@@ -19,6 +19,8 @@ import springweb.backend.model.ItemStatus;
 import springweb.backend.repository.ItemRepository;
 import org.springframework.http.MediaType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +65,9 @@ class ItemControllerIntegrationTest {
     @Test
     void postItem_whenItemPost_ThenReturnItemCreated() throws Exception {
         // GIVEN
+
+        List<Double> geoList = new ArrayList<>(Arrays.asList(48.8566, 2.3522));
+
         repo.deleteAll();
         Uploader mockUploader = mock(Uploader.class);
         when(mockUploader.upload(any(), anyMap())).thenReturn(Map.of("secure_url", "testImgUrl"));
@@ -99,7 +104,7 @@ class ItemControllerIntegrationTest {
                         "testDescription",
                         ItemCategory.TOOL,
                         ItemStatus.TO_LEND,
-                        new double[]{48.8566, 2.3522},
+                        geoList,
                         "me"
 
                 ));
@@ -108,13 +113,15 @@ class ItemControllerIntegrationTest {
     @Test
     void getItemById_getItemWithId1_whenItemWithId1isRequested() throws Exception {
 
+        List<Double> geoList = new ArrayList<>(Arrays.asList(48.8566, 2.3522));
+
         Item newItem = new Item("1",
                 "testName",
                 "testImg",
                 "testDescription",
                 ItemCategory.TOOL,
                 ItemStatus.TO_LEND,
-                new double[]{48.8566, 2.3522},
+                geoList,
                 "me"
                 );
 
@@ -142,13 +149,14 @@ class ItemControllerIntegrationTest {
     void deleteItem() throws Exception {
         //GIVEN
         repo.deleteAll();
+        List<Double> geoList = new ArrayList<>(Arrays.asList(48.8566, 2.3522));
         Item newItem = new Item("1",
                 "testname",
                 "testImg",
                 "testDescription",
                 ItemCategory.TOOL,
                 ItemStatus.TO_LEND,
-                new double[]{48.8566, 2.3522},
+                geoList,
                 "me"
         );
         repo.save(newItem);
@@ -164,13 +172,15 @@ class ItemControllerIntegrationTest {
     @Test
     void updateItem_updateTool() throws Exception {
         //GIVEN
+        List<Double> geoList = new ArrayList<>(Arrays.asList(48.8566, 2.3522));
+
         Item newItem = new Item("1",
                 "testName",
                 "testImgUrl",
                 "testDescription",
                 ItemCategory.TOOL,
                 ItemStatus.TO_LEND,
-                new double[]{48.8566, 2.3522},
+                geoList,
                 "me"
         );
         repo.deleteAll();

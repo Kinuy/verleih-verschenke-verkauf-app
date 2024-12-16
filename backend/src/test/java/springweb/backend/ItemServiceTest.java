@@ -9,6 +9,8 @@ import springweb.backend.repository.ItemRepository;
 import springweb.backend.service.IdService;
 import springweb.backend.service.ItemService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,13 +24,17 @@ class ItemServiceTest {
     ItemRepository itemRepository = mock(ItemRepository.class);
     ItemService itemService = new ItemService(itemRepository,idService);
 
+    List<Double> geoList = new ArrayList<>(Arrays.asList(48.8566, 2.3522));
+
+
+
 
     @Test
     void getAllItems(){
         //GIVEN
-        Item i1 = new Item("1","Hammer1","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND,new double[]{48.8566, 2.3522}, "me");
-        Item i2 = new Item("2","Hammer2","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND,new double[]{48.8566, 2.3522}, "me");
-        Item i3 = new Item("3","Hammer3","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND,new double[]{48.8566, 2.3522}, "me");
+        Item i1 = new Item("1","Hammer1","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND,geoList, "me");
+        Item i2 = new Item("2","Hammer2","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND,geoList, "me");
+        Item i3 = new Item("3","Hammer3","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND,geoList, "me");
         List<Item> expected = List.of(i1,i2,i3);
 
         when(itemRepository.findAll()).thenReturn(List.of(i1,i2,i3));
@@ -46,9 +52,9 @@ class ItemServiceTest {
     @Test
     void saveNewItem_shouldReturnItem_whenGivenDtoItem() {
         //GIVEN
-        double [] geocode = {48.8566, 2.3522};
-        Item expected = new Item("1","test-name","test-url","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND,geocode, "me");
-        ItemDto dto = new ItemDto("test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND,geocode, "me");
+
+        Item expected = new Item("1","test-name","test-url","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND,geoList, "me");
+        ItemDto dto = new ItemDto("test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_LEND,geoList, "me");
         String url = "test-url";
 
         when(itemRepository.save(expected)).thenReturn(expected);
@@ -67,7 +73,7 @@ class ItemServiceTest {
     @Test
     void getItemById_shouldReturnItem_whenGivenID1() {
         //GIVEN
-        Item expected = new Item("1","Hammer1","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND,new double[]{48.8566, 2.3522}, "me");
+        Item expected = new Item("1","Hammer1","url","mein Hammer", ItemCategory.TOOL, ItemStatus.TO_LEND,geoList, "me");
 
         when(itemRepository.findById("1")).thenReturn(Optional.of(expected));
         //WHEN
@@ -91,7 +97,7 @@ class ItemServiceTest {
     @Test
     void updateItem(){
         //GIVEN
-        Item modItem = new Item("1","test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_SELL,new double[]{48.8566, 2.3522}, "me");
+        Item modItem = new Item("1","test-name","test-img","test-description",ItemCategory.TOOL, ItemStatus.TO_SELL,geoList, "me");
 
         when(itemRepository.existsById("1")).thenReturn(true);
         when(itemRepository.save(any(Item.class))).thenReturn(modItem);
