@@ -1,8 +1,8 @@
 package springweb.backend.model;
 
-public record AppUserProfile(
+public record AppUserResponse(
         String id,
         String username,
-        String role
+        AppUserRole role
 ) {
 }
