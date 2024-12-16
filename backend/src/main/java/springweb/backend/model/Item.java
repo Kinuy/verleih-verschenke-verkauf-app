@@ -1,9 +1,13 @@
 package springweb.backend.model;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.With;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document("items")
 @With
@@ -15,7 +19,7 @@ public record Item(
         String description,
         ItemCategory category,
         ItemStatus status,
-        double[] geocode,
+        List<Double> geocode,
         String owner
 ) {
 }
