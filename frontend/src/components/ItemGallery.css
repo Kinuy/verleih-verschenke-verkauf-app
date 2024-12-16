@@ -11,13 +11,13 @@
 
 }
 .Item-container{
-    padding: 5px;
+    padding: 1px;
     border-radius: 5px;
     margin: 10px auto ;
     display: flex;
     min-height: 600px;
     width: 300px;
-    gap: 10px;
+    gap: 3px;
     align-items: flex-start;
     justify-content: flex-start;
     align-content: flex-start;
@@ -26,9 +26,12 @@
 }
 
 .ItemGalleryStatus-container{
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
     display: flex;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50px;
     border: 3px solid hsl(0,0%, 100%);
     background-color: hsla(54, 100%, 50%, 0.9);
@@ -38,12 +41,12 @@
 }
 
 .sell{
-    background-color: hsla(0, 100%, 50%, 0.1)
+    background-color: hsla(9, 100%, 64%, 1)
 }
 .give{
-    background-color: hsla(263, 100%, 50%, 0.1)
+    background-color: hsla(276, 100%, 50%, 0.5)
 }
 .lend{
-    background-color: hsla(180, 100%, 50%, 0.1)
+    background-color: hsla(96, 100%, 50%, 0.5)
 
 }
