@@ -34,7 +34,7 @@ export default function AccountCreate() {
                        placeholder={"Password"}
                        onChange={(e) => setAccountData(prevState => ({...prevState, password: e.target.value}))}/>
                 {user && <p>Welcome on Board {user.username}</p>}
-                <button onClick={registration}>Sign up</button>
+                <button className="button-container"  onClick={registration}>Sign up</button>
                 <h6>
                     Already have an account?
                     <Link to="/account/login" className="no-link-style">Sign in</Link>

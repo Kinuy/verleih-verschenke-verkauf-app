@@ -228,7 +228,7 @@ export default function NewItemCard(props: Props) {
                                 <label className="load-img-message">
                                     no new image loaded
                                 </label>}
-                            <label className="load-img-button" htmlFor={"file-input"}>
+                            <label className="button-container" htmlFor={"file-input"}>
                                 load image
                             </label>
                         </div>
@@ -290,15 +290,16 @@ export default function NewItemCard(props: Props) {
                     />
                 </label>
                 {
-                    (id === "") && <button className="button-item-container">add</button>
+                    (id === "") && <button className="button-container">add</button>
                 }
                 {
-                    (id !== "") && (<button className="button-item-container">update</button>)
+                    (id !== "") && (<button className="button-container">update</button>)
+                }
+                {
+                    (id !== "") && (<button className="button-container" onClick={deleteItem}>delete</button>)
                 }
             </form>
-            {
-                (id !== "") && (<button className="button-item-container" onClick={deleteItem}>delete</button>)
-            }
+
         </div>
     );
 }
