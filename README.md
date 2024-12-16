@@ -7,14 +7,16 @@ whether they are for lending, giving away, or selling.
 
 Features
 
+    User Account: Create Account to manage items.
     Add Items: Quickly add new items to your storage with details such as name, image, description, category, and status.
     View Items: Browse through a list of items in your storage.
     Update Items: Edit the data/details of any item in your storage.
     Delete Items: Remove items from your storage when they are no longer needed.
     Categorization: Categorize items as TOOL, MATERIAL, or custom categories.
     Status Tracking: Assign statuses such as TO_LEND, TO_GIVE_AWAY, or TO_SELL to each item.
+    Item Location: Manage and see item location on map.
 
-Live Demo
+Live Demo (still WIP until 19.12 ;))
 
 Check out the app hosted here. 
 Please be patient, as the server is running slowly. 
