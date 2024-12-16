@@ -44,12 +44,12 @@ export default function AccountLogin(props: Props) {
         window.open(host + '/logout', '_self')
     }
 
-    const logout2 = () =>{
-        axios.post("api/users/logout")
-            .then(()=>console.log("logged out"))
-            .catch(e=>console.error(e))
-            .finally(()=>setUser(null));
-    }
+    // const logout2 = () =>{
+    //     axios.post("api/users/logout")
+    //         .then(()=>console.log("logged out"))
+    //         .catch(e=>console.error(e))
+    //         .finally(()=>setUser(null));
+    // }
 
     const loadCurrentUser = () => {
         axios.get("/api/users/me")

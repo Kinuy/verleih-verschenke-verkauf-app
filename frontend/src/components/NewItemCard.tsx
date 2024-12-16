@@ -10,7 +10,7 @@ import {AppUser} from "../models/AppUser.ts";
 type Props = {
     updateList: () => void;
     items:Item[];
-    user?: AppUser;
+    user: AppUser;
 }
 
 export default function NewItemCard(props: Props) {
@@ -25,7 +25,7 @@ export default function NewItemCard(props: Props) {
     const [itemGeocode, setItemGeocode] = useState<[number,number]>([0,0]);
     const [geoCodeLat, setGeoCodeLat] = useState<number>(0);
     const [geoCodeLong, setGeoCodeLong] = useState<number>(0);
-    const [itemOwner, setItemOwner] = useState<string>("");
+    // const [itemOwner, setItemOwner] = useState<string>("");
 
     function manageItem(event: FormEvent<HTMLFormElement>){
         event.preventDefault()
@@ -102,7 +102,7 @@ export default function NewItemCard(props: Props) {
                 setItemCategory(response.data.category);
                 setItemStatus(response.data.status);
                 setItemGeocode(response.data.geocode);
-                setItemOwner(response.data.owner);
+                // setItemOwner(response.data.owner);
                 setGeoCodeLat(response.data.geocode[0])
                 setGeoCodeLong(response.data.geocode[1])
             })
@@ -216,7 +216,7 @@ export default function NewItemCard(props: Props) {
 */}
 
 
-                        {itemImg && <img src={itemImg} alt={"image not found"}/>}
+                        {itemImg && <img className="item-image-container" src={itemImg} alt={"image not found"}/>}
 
                         <input style={{display: "none"}}
                                id={"file-input"}
@@ -286,7 +286,7 @@ export default function NewItemCard(props: Props) {
                         type="text"
                         value={props.user.username}
                         placeholder={props.user.username}
-                        onChange={(e) => setItemOwner(e.target.value)}
+                        // onChange={(e) => setItemOwner(e.target.value)}
                     />
                 </label>
                 {
