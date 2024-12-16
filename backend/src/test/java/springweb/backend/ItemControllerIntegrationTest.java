@@ -178,6 +178,7 @@ class ItemControllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser(username = "testUserName")
     void deleteItem() throws Exception {
         //GIVEN
         repo.deleteAll();
@@ -202,6 +203,7 @@ class ItemControllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser(username = "testUserName")
     void updateItem_updateTool() throws Exception {
         //GIVEN
         List<Double> geoList = new ArrayList<>(Arrays.asList(48.8566, 2.3522));
