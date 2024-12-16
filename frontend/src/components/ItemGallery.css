@@ -1,36 +1,52 @@
 .ItemGallery-container{
     display: flex;
-    justify-content: center;
-    padding:5px;
+    flex-direction: column;
+    align-content: flex-start;
     margin: auto;
     width: 400px;
-    min-height: 600px;
+    min-height: 700px;
     border-radius: 5px;
     border: 1px solid hsl(0,0%, 80%);
+    background-color: hsla(152, 100%, 50%, 0.4);
+
+}
+.Item-container{
+    padding: 1px;
+    border-radius: 5px;
+    margin: 10px auto ;
+    display: flex;
+    min-height: 600px;
+    width: 300px;
+    gap: 3px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: 10px 20px;
 }
 
 .ItemGalleryStatus-container{
-    display: flex;
-    width: 100px;
-    height: 100px;
+    align-items: flex-start;
+    align-content: center;
     justify-content: center;
-    margin: 5px;
-    padding:1px;
+    display: flex;
+    width: 90px;
+    height: 90px;
     border-radius: 50px;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid hsl(0,0%, 80%);
+    border: 3px solid hsl(0,0%, 100%);
+    background-color: hsla(54, 100%, 50%, 0.9);
+}
+.ItemGalleryStatus-container:hover{
+    background-color: hsla(54, 100%, 50%, 0.9);
 }
 
 .sell{
-    background-color: hsla(0, 100%, 50%, 0.1)
+    background-color: hsla(9, 100%, 64%, 1)
 }
 .give{
-    background-color: hsla(263, 100%, 50%, 0.1)
+    background-color: hsla(276, 100%, 50%, 0.5)
 }
 .lend{
-    background-color: hsla(180, 100%, 50%, 0.1)
+    background-color: hsla(96, 100%, 50%, 0.5)
 
 }

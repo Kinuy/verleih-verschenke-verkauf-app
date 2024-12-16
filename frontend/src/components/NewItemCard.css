@@ -1,3 +1,12 @@
+.manage-container {
+    border-radius: 5px;
+    padding: 5px;
+    margin: auto;
+    width: 400px;
+    min-height: 700px;
+    border: 1px solid hsl(0, 0%, 80%);
+    background-color: hsla(152, 100%, 50%, 0.4);
+}
 .newItemForm{
     display: flex;
     justify-content: center;
@@ -5,9 +14,11 @@
     font-family: Arial,sans-serif;
     border-radius: 5px;
     flex-direction: column;
-    margin: 10px;
-    gap: 5px;
+    margin: auto;
+    color: black;
 }
+
+
 h2{
     align-items: center;
 }
@@ -18,36 +29,22 @@ p{
 }
 
 .text-area-container{
+
     font-family: 'Arial', sans-serif;
     font-size: small;
     width: 200px;
     min-width: 200px;
-    max-width: 400px;
+    max-width: 350px;
+    max-height: 500px;
     min-height: 100px;
-}
-
-.manage-container{
+    border: 1px solid hsl(0,0%, 0%);
     padding: 5px;
     border-radius: 5px;
-    border: 1px solid hsl(0,0%, 80%);
-    margin: auto;
-    width: 400px;
-    min-height: 600px;
 }
 
-.button-item-container{
-    margin: auto;
-    display: flex;
-    border-radius: 5px;
-    border: 1px solid hsl(0,0%, 80%);
-    background-color: hsla(100,10%,10%,10%);
-    flex-direction: column;
-    width: 100px;
-    cursor: pointer;
-}
-.button-item-container:hover{
-    background-color: hsla(50,10%,10%,40%);
-}
+
+
+
 
 .select-item-container{
     padding: 5px;
@@ -68,7 +65,7 @@ p{
 }
 
 button{
-    margin: 5px;
+    margin: 1px;
     text-align: center;
     border: 1px solid hsl(0,0%, 80%);
     border-radius: 5px;
@@ -77,17 +74,32 @@ button{
 
 .image-dialogue-container{
 
-    border: 1px solid hsl(0,0%, 80%);
+    border: 3px solid hsl(0,0%, 100%);
     border-radius: 5px;
     padding: 2px;
     margin: auto;
     display: flex;
     flex-direction: column;
     width: 200px;
+    height:180px;
 }
 img{
-    height: auto;
-    width: 200px;
+    height: 50px;
+    width: 50px;
+}
+
+.item-image-container{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    height: 100px;
+    width: 100px;
+    border: 2px solid hsl(0,0%, 100%);
+}
+
+.item-detail-img-container{
+    border: 3px solid hsl(0,0%, 100%);
 }
 
 .load-img{
@@ -107,25 +119,26 @@ img{
     align-content: center;
 }
 
-.load-img-button{
-    align-content: center;
-    font-size: small;
-    text-align: center;
-    margin: auto;
-    padding: 2px;
-    border: 1px solid hsl(0,0%, 80%);
-    cursor: pointer;
-    height: 20px;
-    width: 100px;
-    background-color: hsla(100,10%,10%,10%);
-    border-radius: 5px;
-
-}
-.load-img-button:hover{
-    background-color: hsla(50,10%,10%,40%);
-}
-
 .input-container{
  width: 200px;
     padding: 5px;
+}
+
+.button-container{
+    align-content: center;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: small;
+    font-weight: bold;
+    margin:  5px auto;
+    padding: 2px;
+    border-radius: 5px;
+    border: 2px solid hsl(0,0%, 100%);
+    background-color: hsla(152, 100%, 50%, 0.5);
+    cursor: pointer;
+    height: 30px;
+    width: 100px;
+}
+.button-container:hover{
+    background-color: hsla(54, 100%, 50%, 0.9);
 }

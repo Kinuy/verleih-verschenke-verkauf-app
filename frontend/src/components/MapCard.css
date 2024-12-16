@@ -19,8 +19,8 @@
 /* height of the container */
 .leaflet-container {
     margin: auto;
-    border-radius: 1rem;
+    border-radius: 5px;
     width: 300px;
-    height: 300px;
-    border: 2px solid hsl(10,10%, 80%);
+    height: 200px;
+    border: 3px solid hsl(0,0%, 100%);
 }

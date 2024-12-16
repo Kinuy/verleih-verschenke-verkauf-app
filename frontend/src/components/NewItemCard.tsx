@@ -5,10 +5,12 @@ import "./NewItemCard.css";
 import {ItemCategory} from "../models/ItemCategory.ts";
 import {ItemStatus} from "../models/ItemStatus.ts";
 import {ItemDto} from "../models/ItemDto.ts";
+import {AppUser} from "../models/AppUser.ts";
 
 type Props = {
     updateList: () => void;
     items:Item[];
+    user: AppUser;
 }
 
 export default function NewItemCard(props: Props) {
@@ -23,7 +25,7 @@ export default function NewItemCard(props: Props) {
     const [itemGeocode, setItemGeocode] = useState<[number,number]>([0,0]);
     const [geoCodeLat, setGeoCodeLat] = useState<number>(0);
     const [geoCodeLong, setGeoCodeLong] = useState<number>(0);
-    const [itemOwner, setItemOwner] = useState<string>("");
+    // const [itemOwner, setItemOwner] = useState<string>("");
 
     function manageItem(event: FormEvent<HTMLFormElement>){
         event.preventDefault()
@@ -100,7 +102,7 @@ export default function NewItemCard(props: Props) {
                 setItemCategory(response.data.category);
                 setItemStatus(response.data.status);
                 setItemGeocode(response.data.geocode);
-                setItemOwner(response.data.owner);
+                // setItemOwner(response.data.owner);
                 setGeoCodeLat(response.data.geocode[0])
                 setGeoCodeLong(response.data.geocode[1])
             })
@@ -131,7 +133,7 @@ export default function NewItemCard(props: Props) {
             category: itemCategory,
             status: itemStatus,
             geocode: itemGeocode,
-            owner: itemOwner
+            owner: props.user.username
         };
         data.append("itemDTO", new Blob([JSON.stringify(itemData)], {'type': "application/json"}))
 
@@ -214,7 +216,7 @@ export default function NewItemCard(props: Props) {
 */}
 
 
-                        {itemImg && <img src={itemImg} alt={"image not found"}/>}
+                        {itemImg && <img className="item-image-container" src={itemImg} alt={"image not found"}/>}
 
                         <input style={{display: "none"}}
                                id={"file-input"}
@@ -226,7 +228,7 @@ export default function NewItemCard(props: Props) {
                                 <label className="load-img-message">
                                     no new image loaded
                                 </label>}
-                            <label className="load-img-button" htmlFor={"file-input"}>
+                            <label className="button-container" htmlFor={"file-input"}>
                                 load image
                             </label>
                         </div>
@@ -282,21 +284,22 @@ export default function NewItemCard(props: Props) {
                     <p>Item owner:</p>
                     <input className="input-container"
                         type="text"
-                        value={itemOwner}
-                        placeholder={itemOwner}
-                        onChange={(e) => setItemOwner(e.target.value)}
+                        value={props.user.username}
+                        placeholder={props.user.username}
+                        // onChange={(e) => setItemOwner(e.target.value)}
                     />
                 </label>
                 {
-                    (id === "") && <button className="button-item-container">add</button>
+                    (id === "") && <button className="button-container">add</button>
                 }
                 {
-                    (id !== "") && (<button className="button-item-container">update</button>)
+                    (id !== "") && (<button className="button-container">update</button>)
+                }
+                {
+                    (id !== "") && (<button className="button-container" onClick={deleteItem}>delete</button>)
                 }
             </form>
-            {
-                (id !== "") && (<button className="button-item-container" onClick={deleteItem}>delete</button>)
-            }
+
         </div>
     );
 }
