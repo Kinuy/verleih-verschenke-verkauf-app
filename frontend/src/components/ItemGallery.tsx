@@ -47,30 +47,33 @@ export default function ItemGallery(props:Props) {
 
             <div className= "ItemGallery-container">
                 <ItemSearchBar onSearch={filterItems}/>
-            {
-                filteredItems.map((element)=>{
-                    if (element.status === "TO_SELL") {
-                        return (
-                            <div key={element.id} className="ItemGalleryStatus-container sell">
-                                <ItemCard item={element} />
-                            </div>
-                        );
-                    } else if (element.status === "TO_LEND") {
-                        return (
-                            <div key={element.id} className="ItemGalleryStatus-container lend" >
-                                <ItemCard item={element} />
-                            </div>
-                        );
-                    } else if (element.status === "TO_GIVE_AWAY") {
-                        return (
-                            <div key={element.id} className="ItemGalleryStatus-container give">
-                                <ItemCard item={element} />
-                            </div>
-                        );
-                    } else {
-                        return null;
-                    }})
-            }
+                <div className= "Item-container">
+                    {
+                        filteredItems.map((element)=>{
+                            if (element.status === "TO_SELL") {
+                                return (
+                                    <div key={element.id} className="ItemGalleryStatus-container sell">
+                                        <ItemCard item={element} />
+                                    </div>
+                                );
+                            } else if (element.status === "TO_LEND") {
+                                return (
+                                    <div key={element.id} className="ItemGalleryStatus-container lend" >
+                                        <ItemCard item={element} />
+                                    </div>
+                                );
+                            } else if (element.status === "TO_GIVE_AWAY") {
+                                return (
+                                    <div key={element.id} className="ItemGalleryStatus-container give">
+                                        <ItemCard item={element} />
+                                    </div>
+                                );
+                            } else {
+                                return null;
+                            }})
+                    }
+                </div>
+
             </div>
         </div>
     );
