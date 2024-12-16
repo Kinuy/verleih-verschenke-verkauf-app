@@ -1,7 +1,6 @@
 .item-detail-container{
     padding: 5px;
     margin: auto;
-    border: 1px solid hsl(10,10%, 80%);
     border-radius: 5px;
     width: 400px;
     height: 400px;
@@ -10,14 +9,42 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    border: 1px solid hsl(0,0%, 80%);
+    background-color: hsla(152, 100%, 50%, 0.4);
+}
+.item-detail-img-container{
+    border: 1px solid hsl(0,0%, 100%);
+}
+.item-description-container{
+    text-align: left;
+    padding: 5px;
+}
+.item-detail-content-container{
+    padding: 5px;
+    list-style: none;
+    text-align: left;
+    font-size: xx-small;
+    border: 1px solid hsl(0,0%, 100%);
 }
 
 .item-detail-map-container{
+    justify-content: center;
+    align-items: center;
     margin: auto;
+    height: 200px;
+    width: 300px;
+    border-radius: 5px;
+
+
 }
+
 
 .item-detail-card-container{
     margin: auto;
+    width: 300px;
+    height: 350px;
+    border-radius: 5px;
+    border: 3px solid hsl(0,0%, 100%);
 }
 p{
     align-items: center;
@@ -25,9 +52,10 @@ p{
 }
 
 img{
+    justify-content: start;
+    margin: 5px;
     height: 200px;
     width: auto;
     border-radius: 10px;
-    border: 1px solid hsl(10,10%, 80%);
 
 }

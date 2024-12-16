@@ -11,3 +11,15 @@
     width: 400px;
     min-height: 600px;
 }
+
+
+
+
+button{
+    border: 1px solid hsl(0,0%, 100%);
+    background-color:  hsla(225, 100%, 50%, 0.2);
+    padding: 5px;
+}
+button:hover{
+    background-color:  hsla(225, 100%, 50%, 0.5);
+}

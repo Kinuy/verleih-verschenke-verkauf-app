@@ -1,9 +1,8 @@
 .itemCard-container{
 
-    border-radius: 50px;
+    border-radius: 100px;
     text-align: center;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100px;
@@ -14,8 +13,7 @@
 }
 
 .itemCard-container:hover {
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.75);
-    background-color: rgba(0, 123, 255, 0.1);
+
 }
 
 .itemCard-tags{
@@ -25,9 +23,11 @@
 }
 
 .itemCard-container .item-card-img-container{
-    height: auto;
-    width: 50px;
-    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 80px;
+    border-radius: 100px;
 }
 
 p{
