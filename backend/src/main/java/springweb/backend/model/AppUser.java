@@ -9,7 +9,7 @@ public record AppUser(
         String id,
         String username,
         String password,
-        String role,
+        AppUserRole role,
         List<String> items
 ) {
 }
