@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import springweb.backend.model.AppUser;
 import springweb.backend.model.AppUserRegisterDto;
+import springweb.backend.model.AppUserRole;
 import springweb.backend.repository.AppUserRepository;
 
 import java.util.Collections;
@@ -27,7 +28,7 @@ public class AppUserService{
         AppUser appUser = new AppUser(null,
                 appUserRegisterDto.username(),
                 passwordEncoder.encode(appUserRegisterDto.password()),
-                "USER",
+                AppUserRole.USER,
                 Collections.emptyList()
         );
         return userRepo.save(appUser);
