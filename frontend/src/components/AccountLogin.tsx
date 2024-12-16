@@ -60,11 +60,11 @@ export default function AccountLogin(props: Props) {
                        onChange={(e) => setAccountData(prevState => ({...prevState, password: e.target.value}))}/>
                 {(user === undefined) ?
 
-                    <button onClick={login}>Sign in</button>
+                    <button className="button-container" onClick={login}>Sign in</button>
                     :
                     <div className="greeting-container">
                         {user && <p>Great to see you again {user.username}.</p>}
-                        <button onClick={logout}>Sign out</button>
+                        <button className="button-container" onClick={logout}>Sign out</button>
                     </div>
                 }
                 <h6>
