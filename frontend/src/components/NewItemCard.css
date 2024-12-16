@@ -98,6 +98,10 @@ img{
     border: 2px solid hsl(0,0%, 100%);
 }
 
+.item-detail-img-container{
+    border: 3px solid hsl(0,0%, 100%);
+}
+
 .load-img{
     display:flex;
     justify-content: center;
