@@ -1,6 +1,6 @@
 export type AppUser = {
     id: string,
-    role: string,
     username: string,
+    role: "ADMIN" | "USER",
     items: Array<string>
 }
