@@ -1,20 +1,14 @@
 .home-container {
-
     color: black;
     padding: 50px;
     font-family: 'Arial', sans-serif;
-
     border-radius: 5px;
     border: 1px solid hsl(0,0%, 80%);
     background-color: hsla(152, 100%, 50%, 0.4);
     margin: auto;
     width: 400px;
-    min-height: 600px;
+    min-height: 700px;
 }
-
-
-
-
 button{
     border: 1px solid hsl(0,0%, 100%);
     background-color:  hsla(225, 100%, 50%, 0.2);

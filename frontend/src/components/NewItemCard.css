@@ -1,10 +1,12 @@
-.manage-container{
+.manage-container {
     border-radius: 5px;
+    padding: 5px;
     margin: auto;
     width: 400px;
-    min-height: 600px;
+    min-height: 700px;
+    border: 1px solid hsl(0, 0%, 80%);
+    background-color: hsla(152, 100%, 50%, 0.4);
 }
-
 .newItemForm{
     display: flex;
     justify-content: center;
@@ -13,12 +15,7 @@
     border-radius: 5px;
     flex-direction: column;
     margin: auto;
-    width: 400px;
-    min-height: 600px;
     color: black;
-    padding: 50px;
-    border: 1px solid hsl(0,0%, 100%);
-    background-color: hsla(152, 100%, 50%, 0.4);
 }
 
 
@@ -32,12 +29,17 @@ p{
 }
 
 .text-area-container{
+
     font-family: 'Arial', sans-serif;
     font-size: small;
     width: 200px;
     min-width: 200px;
-    max-width: 400px;
+    max-width: 350px;
+    max-height: 500px;
     min-height: 100px;
+    border: 1px solid hsl(0,0%, 0%);
+    padding: 5px;
+    border-radius: 5px;
 }
 
 
@@ -79,11 +81,21 @@ button{
     display: flex;
     flex-direction: column;
     width: 200px;
+    height:180px;
 }
 img{
-    border: 3px solid hsl(0,0%, 100%);
+    height: 50px;
+    width: 50px;
+}
+
+.item-image-container{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: auto;
     height: 100px;
     width: 100px;
+    border: 2px solid hsl(0,0%, 100%);
 }
 
 .load-img{
@@ -101,11 +113,6 @@ img{
     padding: 2px;
     width: 150px;
     align-content: center;
-}
-
-
-.load-img-button:hover{
-    background-color: hsla(50,10%,10%,40%);
 }
 
 .input-container{
