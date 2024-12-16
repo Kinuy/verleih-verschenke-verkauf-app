@@ -13,7 +13,7 @@ public record ItemDto (
         String description,
         ItemCategory category,
         ItemStatus status,
-        double[] geocode,
+        List<Double> geocode,
         String owner
 ) {
 }
