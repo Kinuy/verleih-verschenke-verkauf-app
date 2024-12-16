@@ -14,13 +14,9 @@ import Account from "./components/Account.tsx";
 import AccountLogin from "./components/AccountLogin.tsx";
 import AccountCreate from "./components/AccountCreate.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import {AppUser} from "./models/AppUser.ts";
 
-type AppUser = {
-     id: string,
-     username: string,
-     role: string,
-    items: Array<string>
-}
+
 
 export default function App() {
 
