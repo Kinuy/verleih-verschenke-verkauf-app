@@ -1,9 +1,9 @@
 import "./Account.css"
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {Link} from "react-router-dom";
 import {AppUser} from "../models/AppUser.ts";
 import {useNavigate} from "react-router";
+import axiosAccess from "../utility/access.ts";
 
 type Props = {
     updateUser: (appUser: AppUser)=>void
@@ -21,7 +21,8 @@ export default function AccountLogin(props: Props) {
     const [accountData, setAccountData] = useState<{ username: string, password: string }>({username: "", password: ""})
 
     const login = () => {
-        axios.get("/api/users/me", {
+
+        axiosAccess.get("/api/users/me", {
             auth: {
                 username: accountData.username,
                 password: accountData.password
@@ -52,7 +53,7 @@ export default function AccountLogin(props: Props) {
     // }
 
     const loadCurrentUser = () => {
-        axios.get("/api/users/me")
+        axiosAccess.get("/api/users/me")
             .then((response) => {
                 setUser(response.data)
             })

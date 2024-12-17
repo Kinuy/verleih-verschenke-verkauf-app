@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 import springweb.backend.model.AppUser;
 import springweb.backend.model.AppUserResponse;
@@ -35,6 +36,11 @@ public class AppUserController {
             AppUser appUser = appUserService.addUser(appUserRegisterDto);
             return new AppUserResponse(appUser.id(), appUser.username(), appUser.role());
         }
+    }
+
+    @GetMapping("csrf")
+    public CsrfToken getCsrfToken(CsrfToken csrfToken) {
+        return csrfToken;
     }
 
 

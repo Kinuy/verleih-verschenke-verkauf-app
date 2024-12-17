@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {Item} from "../models/Item.ts";
-import axios from "axios";
 import ItemCard from "./ItemCard.tsx";
 import "./ItemGallery.css";
 import ItemSearchBar from "./ItemSearchBar.tsx";
+import axiosAccess from "../utility/access.ts";
 
 type Props = {
     items: Item[];
@@ -15,7 +15,7 @@ export default function ItemGallery(props:Props) {
     const [filteredItems, setFilteredItems] = useState<Item[]>([]);
 
     function fetchAllItems(){
-        axios.get("/api/item")
+        axiosAccess.get("/api/item")
             .then((response)=>{
                 setItems(response.data);
                 setFilteredItems(response.data);

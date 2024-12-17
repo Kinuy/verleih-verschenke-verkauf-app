@@ -1,9 +1,9 @@
 import "./ItemDetails.css"
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {Item} from "../models/Item.ts";
 import MapCard from "./MapCard.tsx";
+import axiosAccess from "../utility/access.ts";
 
 const initVal:Item = {
     "id":"",
@@ -23,7 +23,7 @@ export default function ItemDetails() {
 
     function fetchItemById(){
 
-        axios.get(`/api/item/${id}`)
+        axiosAccess.get(`/api/item/${id}`)
             .then((response)=>{
                 setItem(response.data)
             })
