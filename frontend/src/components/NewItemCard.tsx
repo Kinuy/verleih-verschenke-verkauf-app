@@ -1,11 +1,11 @@
 import {Item} from "../models/Item.ts";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import axios from "axios";
 import "./NewItemCard.css";
 import {ItemCategory} from "../models/ItemCategory.ts";
 import {ItemStatus} from "../models/ItemStatus.ts";
 import {ItemDto} from "../models/ItemDto.ts";
 import {AppUser} from "../models/AppUser.ts";
+import axiosAccess from "../utility/access.ts";
 
 type Props = {
     updateList: () => void;
@@ -63,7 +63,7 @@ export default function NewItemCard(props: Props) {
 
         data.append("itemDto", new Blob([JSON.stringify(savedItem)], {'type': "application/json"}))
 
-        axios
+        axiosAccess
             .post(`/api/item`, data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -79,7 +79,7 @@ export default function NewItemCard(props: Props) {
     function deleteItem() {
         const checkDelete = window.confirm("Do you really want to delete this item?")
         if (checkDelete) {
-            axios.delete(`api/item/${id}`)
+            axiosAccess.delete(`api/item/${id}`)
                 .then(()=>{
                     setId("");
                     props.updateList();
@@ -94,7 +94,7 @@ export default function NewItemCard(props: Props) {
 
     function fetchItemDetails(id:string) {
 
-        axios.get(`/api/item/${id}`)
+        axiosAccess.get(`/api/item/${id}`)
             .then((response) => {
                 setItemName(response.data.name);
                 setItemImg(response.data.img);
@@ -137,7 +137,7 @@ export default function NewItemCard(props: Props) {
         };
         data.append("itemDTO", new Blob([JSON.stringify(itemData)], {'type': "application/json"}))
 
-        axios
+        axiosAccess
             .put(`/api/item/${id}`, data, {
                 headers: {
                     "Content-Type": "multipart/form-data",

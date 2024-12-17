@@ -1,15 +1,15 @@
 import "./Account.css"
 import {useState} from "react";
-import axios from "axios";
 import {Link} from "react-router-dom";
 import {AppUser} from "../models/AppUser.ts";
+import axiosAccess from "../utility/access.ts";
 
 export default function AccountCreate() {
 
     const [accountData,setAccountData] = useState<{ username: string, password: string }>({username: "", password: ""})
     const [user, setUser] = useState<AppUser | undefined>(undefined)
     const registration = () => {
-        axios.post("/api/users", {
+        axiosAccess.post("/api/users", {
 
             username: accountData.username,
             password: accountData.password

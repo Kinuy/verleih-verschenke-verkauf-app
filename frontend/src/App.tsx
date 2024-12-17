@@ -6,7 +6,6 @@ import "./App.css";
 import Header from "./components/Header.tsx";
 import {Route, Routes} from "react-router";
 import Home from "./components/Home.tsx";
-import axios from "axios";
 import {useState} from "react";
 import {Item} from "./models/Item.ts";
 import ItemDetails from "./components/ItemDetails.tsx";
@@ -15,6 +14,7 @@ import AccountLogin from "./components/AccountLogin.tsx";
 import AccountCreate from "./components/AccountCreate.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import {AppUser} from "./models/AppUser.ts";
+import axiosAccess from "./utility/access.ts";
 
 
 
@@ -27,7 +27,7 @@ export default function App() {
 
 
     function fetchAllItems(){
-        axios.get("/api/item")
+        axiosAccess.get("/api/item")
             .then((response)=>{
                 setItems(response.data);
             })
