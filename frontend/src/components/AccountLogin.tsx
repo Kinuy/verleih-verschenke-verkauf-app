@@ -42,7 +42,7 @@ export default function AccountLogin(props: Props) {
     const logout = () => {
         const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080' : window.location.origin
 
-        window.open(host + '/logout', '_self')
+        window.open(host + '/', '_self')
     }
 
     // const logout2 = () =>{

@@ -1,29 +1,8 @@
-.itemCard-container{
-
-    justify-content: center;
-    align-items: center;
-    border-radius: 100px;
+.item-card-img-container{
+    margin: 4px;
     display: flex;
-    width: 85px;
-    height: 85px;
     cursor: pointer;
-}
-
-.itemCard-container:hover {
-
-}
-
-.itemCard-tags{
-    align-items: center;
-    justify-content: center;
-
-}
-
-.itemCard-container .item-card-img-container{
     height: 80px;
     width: 80px;
     border-radius: 100px;
-}
-
-p{
 }
