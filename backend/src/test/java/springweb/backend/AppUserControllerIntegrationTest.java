@@ -17,6 +17,7 @@ import springweb.backend.service.AppUserService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -29,10 +30,10 @@ class AppUserControllerIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Autowired
     private AppUserService appUserService;
 
-    @MockBean
+    @Autowired
     private AppUserRepository userRepo;
 
     private AppUser appUser;
@@ -52,10 +53,11 @@ class AppUserControllerIntegrationTest {
     @WithMockUser(username = "testuser")
     public void testGetCurrentUser() throws Exception {
         // Arrange: Mock the service method
-        when(appUserService.getUserByUsername("testuser")).thenReturn(appUser);
 
+        userRepo.save(appUser);
         // Act & Assert: Perform the GET request and validate the response
         mockMvc.perform(MockMvcRequestBuilders.get("/api/users/me")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -66,20 +68,18 @@ class AppUserControllerIntegrationTest {
                 """));
 
         // Verify the service method was called once
-        verify(appUserService, times(1)).getUserByUsername("testuser");
     }
 
     @Test
-    @WithMockUser(username = "testuser")
     public void testRegisterUser_Success() throws Exception {
         // Arrange: Prepare the DTO and mock the necessary methods
         AppUserRegisterDto registerDto = new AppUserRegisterDto("newuser", "password");
         AppUser newUser = new AppUser("2L", "newuser", "encodedPassword", AppUserRole.USER, null);
-        when(appUserService.userExistsByUsername("newuser")).thenReturn(false);
-        when(appUserService.addUser(any(AppUserRegisterDto.class))).thenReturn(newUser);
+
 
         // Act & Assert: Perform the POST request and validate the response
         mockMvc.perform(MockMvcRequestBuilders.post("/api/users")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                         {
@@ -98,8 +98,6 @@ class AppUserControllerIntegrationTest {
                 .andExpect(jsonPath("$.id").isNotEmpty());
 
         // Verify the service methods
-        verify(appUserService, times(1)).userExistsByUsername("newuser");
-        verify(appUserService, times(1)).addUser(any(AppUserRegisterDto.class));
     }
 
 /*    @Test

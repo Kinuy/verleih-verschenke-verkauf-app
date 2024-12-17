@@ -29,6 +29,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -86,7 +87,9 @@ class ItemControllerIntegrationTest {
         //GIVEN
         repo.deleteAll();
         //WHEN & THEN
-        mvc.perform(get("/api/item"))
+        mvc.perform(get("/api/item")
+                        .with(csrf())
+                )
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         []
@@ -107,6 +110,7 @@ class ItemControllerIntegrationTest {
 
         // WHEN
         mvc.perform(MockMvcRequestBuilders.multipart("/api/item")
+
                 .file(new MockMultipartFile("image", "test.jpg", "image/jpeg", "test image".getBytes()))
                 .file(new MockMultipartFile("itemDto", "", "application/json", """
                          {
@@ -118,7 +122,9 @@ class ItemControllerIntegrationTest {
                          "geocode":[48.8566, 2.3522],
                          "owner":"me"
                          }
-                        """.getBytes())))
+                        """.getBytes()))
+                                .with(csrf())
+                )
                 .andExpect(status().isCreated());
 
         // THEN
@@ -160,7 +166,9 @@ class ItemControllerIntegrationTest {
         repo.deleteAll();
         repo.save(newItem);
 
-        mvc.perform(get("/api/item/{id}", 1))
+        mvc.perform(get("/api/item/{id}", 1)
+                        .with(csrf())
+                )
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         {
@@ -196,7 +204,9 @@ class ItemControllerIntegrationTest {
 
 
         //WHEN
-        mvc.perform(delete("/api/item/1"))
+        mvc.perform(delete("/api/item/1")
+                        .with(csrf())
+                )
                 //THEN
                 .andExpect(status().isOk());
         Assertions.assertFalse(repo.existsById("1"));
@@ -242,7 +252,10 @@ class ItemControllerIntegrationTest {
                                                      "geocode": [48.8566, 2.3522],
                                                      "owner": "me"
                                                     }
-                        """.getBytes()))
+                        """.getBytes())
+
+                        )
+                        .with(csrf())
                         .contentType("multipart/form-data")
                         .with(request -> { request.setMethod("PUT"); return request; }))
                 //THEN
