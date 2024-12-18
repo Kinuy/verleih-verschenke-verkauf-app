@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -15,9 +16,12 @@ import springweb.backend.repository.AppUserRepository;
 import springweb.backend.service.AppUserService;
 
 
+import java.util.Collections;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -78,7 +82,7 @@ class AppUserControllerIntegrationTest {
 
 
         // Act & Assert: Perform the POST request and validate the response
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/users/register")
+        mockMvc.perform(post("/api/users/register")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -98,6 +102,39 @@ class AppUserControllerIntegrationTest {
                 .andExpect(jsonPath("$.id").isNotEmpty());
 
         // Verify the service methods
+    }
+
+    @Test
+    @WithMockUser(username = "testuser") // Simulate a logged-in user with username "testuser"
+    void testLogin_Success() throws Exception {
+        // Arrange: Mock the service method call
+        AppUserResponse mockResponse = new AppUserResponse("1L", "testuser", AppUserRole.USER, Collections.emptyList());
+
+        //when(appUserService.getLoggedInUser(any(User.class))).thenReturn(mockResponse);
+        userRepo.save(appUser);
+        // Act & Assert: Perform the POST request and verify the response
+        mockMvc.perform(post("/api/users/login")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()) // Check if the response status is OK (200)
+                .andExpect(content().json("""
+                            {
+                                "id": "1L",
+                                "username": "testuser",
+                                "role": "USER",
+                                "items": null
+                            }
+                        """));
+        // Verify that the service method was called with the correct user
+        //verify(appUserService, times(1)).getLoggedInUser(any(User.class));
+    }
+
+    @Test
+    void testLogin_UnauthorizedUser() throws Exception {
+        // Arrange: Simulate a scenario where no user is authenticated
+        mockMvc.perform(post("/api/users/login")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isForbidden()); // Expect a 401 Unauthorized status
     }
 
 /*    @Test
