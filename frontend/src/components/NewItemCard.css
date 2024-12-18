@@ -15,7 +15,7 @@
     border-radius: 5px;
     flex-direction: column;
     margin: auto;
-    color: black;
+    color: white;
 }
 
 
@@ -25,7 +25,8 @@ h2{
 
 p{
     font-family: 'Arial', sans-serif;
-    text-align: center;
+    font-size: x-small;
+    text-align: left;
 }
 
 .text-area-container{
@@ -47,6 +48,8 @@ p{
 
 
 .select-item-container{
+    color: white;
+    margin-top: 10px;
     padding: 5px;
     text-align: center;
     border-radius: 5px;
@@ -56,6 +59,9 @@ p{
 }
 
 .select-container{
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 2px;
     padding: 5px;
     text-align: center;
     border-radius: 5px;
@@ -74,7 +80,6 @@ button{
 
 .image-dialogue-container{
 
-    border: 3px solid hsl(0,0%, 100%);
     border-radius: 5px;
     padding: 2px;
     margin: auto;
@@ -131,7 +136,7 @@ img{
     font-size: small;
     font-weight: bold;
     margin:  5px auto;
-    padding: 2px;
+    padding: 5px;
     border-radius: 5px;
     border: 2px solid hsl(0,0%, 100%);
     background-color: hsla(205, 100%, 20%, 0.7);
@@ -141,4 +146,17 @@ img{
 }
 .button-container:hover{
     background-color: hsla(54, 100%, 50%, 0.9);
+}
+
+.position-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.input-pos-container{
+    width: 90px;
+}
+
+label{
+    margin-top: 2px;
 }

@@ -27,7 +27,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                //.csrf(Customizer.withDefaults())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(a->a
                         .requestMatchers("/api/admin/**").hasRole(AppUserRole.ADMIN.name())
@@ -36,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/item/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/logout").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/users/me").authenticated()
                         .anyRequest().permitAll())
                 .logout(l->l.logoutSuccessUrl(appUrl))

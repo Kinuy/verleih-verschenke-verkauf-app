@@ -15,7 +15,7 @@ type Props = {
 
 export default function MapCard(props:Props) {
     return (
-        <MapContainer center={[52.506615, 13.317524]} zoom={10}>
+        <MapContainer center={[52.506615, 13.317524]} zoom={5}>
             <TileLayer
                 attribution=""
                 url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"

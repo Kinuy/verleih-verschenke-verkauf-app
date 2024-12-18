@@ -1,9 +1,11 @@
 package springweb.backend.controller;
 
 import com.cloudinary.api.exceptions.BadRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +48,13 @@ public class AppUserController {
     public CsrfToken getCsrfToken(CsrfToken csrfToken) {
         return csrfToken;
     }
+
+//    @PostMapping("/logout")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void logout(HttpSession session) {
+//        session.invalidate();
+//        SecurityContextHolder.clearContext();
+//    }
 
 
 }

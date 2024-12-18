@@ -14,14 +14,17 @@
 .item-detail-img-container{
 }
 .item-description-container{
+    margin-top: 10px;
     text-align: left;
     padding: 5px;
 }
 .item-detail-content-container{
+    align-content: center;
     padding: 5px;
     list-style: none;
-    text-align: left;
-    font-size: xx-small;
+    text-align: center;
+    font-size: x-small;
+    color: white;
 }
 
 .item-detail-map-container{

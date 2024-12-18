@@ -42,9 +42,23 @@ export default function AccountLogin(props: Props) {
     }
 
     const logout = () => {
-        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080' : window.location.origin
+        const host = window.location.host === 'localhost:5173'
+            ? 'http://localhost:8080'
+            : window.location.origin
 
-        window.open(host + "/", '_self')
+        window.open(host + "/logout", '_self')
+
+        // axiosAccess.post("/api/users/logout")
+        //     .then(()=>{
+        //         console.log("Logged out successfully.")
+        //         setUser(undefined)
+        //         navigate("/")
+        //     })
+        //     .catch(e=>console.error("Logout failed",e));
+
+
+
+        //setUser(undefined)
     }
 
     // const logout2 = () =>{

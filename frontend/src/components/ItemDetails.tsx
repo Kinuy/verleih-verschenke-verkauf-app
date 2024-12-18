@@ -46,7 +46,6 @@ export default function ItemDetails() {
                 </ul>
                 <p className="item-description-container">Description: {item.description}</p>
             </div>
-
             <div className="item-detail-map-container">
                 <MapCard item={item}/>
             </div>

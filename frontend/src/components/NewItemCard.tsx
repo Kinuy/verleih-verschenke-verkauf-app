@@ -199,15 +199,7 @@ export default function NewItemCard(props: Props) {
                         }
                     </select>
                 </div>
-                <label>
-                    <p>Item name:</p>
-                    <input className="input-container"
-                        type="text"
-                        value={itemName}
-                        placeholder={itemName}
-                        onChange={(e) => setItemName(e.target.value)}
-                    />
-                </label>
+
                 <label>
                     <div className="image-dialogue-container">
 
@@ -235,11 +227,21 @@ export default function NewItemCard(props: Props) {
                     </div>
                 </label>
                 <label>
-                    <p>Description:</p>
-                    <textarea className="text-area-container"
-                        value={itemDescription}
-                        placeholder="description"
-                        onChange={(e) => setItemDescription(e.target.value)}
+                    <p>Item owner:</p>
+                    <input className="input-container"
+                           type="text"
+                           value={props.user?.username}
+                           placeholder={props.user?.username}
+                        // onChange={(e) => setItemOwner(e.target.value)}
+                    />
+                </label>
+                <label>
+                    <p>Item name:</p>
+                    <input className="input-container"
+                           type="text"
+                           value={itemName}
+                           placeholder={itemName}
+                           onChange={(e) => setItemName(e.target.value)}
                     />
                 </label>
                 <label>
@@ -261,34 +263,41 @@ export default function NewItemCard(props: Props) {
                         <option className="sell-container" value="TO_SELL">TO_SELL</option>
                     </select>
                 </label>
-                <label>
-                    <p>Item Position - Latitude:</p>
-                    <input className="input-container"
-                        type="text"
-                        value={geoCodeLat}
-                        placeholder="latitude"
-                        onChange={handleGeocodeChangeLat}
-                    />
 
-                </label>
+
                 <label>
-                    <p>Item Position - Longitude:</p>
-                    <input className="input-container"
-                        type="text"
-                        value={geoCodeLong}
-                        placeholder="longitude"
-                        onChange={handleGeocodeChangeLong}
+                    <p>Item Position [Latitude | Longitude] :</p>
+                </label>
+                <div className="position-container">
+                    <label>
+
+                        <input className="input-pos-container"
+                               type="number"
+                               value={geoCodeLat}
+                               placeholder="latitude"
+                               onChange={handleGeocodeChangeLat}
+                        />
+
+                    </label>
+                    <label>
+                        <input className="input-pos-container"
+                               type="number"
+                               value={geoCodeLong}
+                               placeholder="longitude"
+                               onChange={handleGeocodeChangeLong}
+                        />
+                    </label>
+                </div>
+                <label>
+                    <p>Description:</p>
+                    <textarea className="text-area-container"
+                              value={itemDescription}
+                              placeholder="description"
+                              onChange={(e) => setItemDescription(e.target.value)}
                     />
                 </label>
-                <label>
-                    <p>Item owner:</p>
-                    <input className="input-container"
-                        type="text"
-                        value={props.user?.username}
-                        placeholder={props.user?.username}
-                        // onChange={(e) => setItemOwner(e.target.value)}
-                    />
-                </label>
+
+
                 {
                     (id === "") && <button className="button-container">add</button>
                 }
