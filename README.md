@@ -1,5 +1,7 @@
 Verschenke-Verleih-Verkaufe-App
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=kinuy_verleih-verschenke-verkauf-app-backend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=kinuy_verleih-verschenke-verkauf-app-backend)
+
 A simple and intuitive app for managing items in your storage. 
 With this application, you can add, edit, delete, and view items stored in a MongoDB database. 
 The app supports full CRUD (Create, Read, Update, Delete) operations, making it an ideal solution for organizing and keeping track of your belongings, 
