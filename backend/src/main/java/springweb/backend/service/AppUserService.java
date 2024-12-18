@@ -22,12 +22,6 @@ public class AppUserService{
     private final PasswordEncoder passwordEncoder;
 
 
-    public AppUserResponse getLoggedInUser2() {
-        var principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        AppUser appUser =  getUserByUsername(principal.getUsername());
-        return new AppUserResponse(appUser.id(),appUser.username(),appUser.role(),appUser.items());
-    }
-
     public AppUserResponse getLoggedInUser(User user) {
         AppUser appUser =  getUserByUsername(user.getUsername());
         return new AppUserResponse(appUser.id(),appUser.username(),appUser.role(),appUser.items());
