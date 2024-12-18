@@ -19,22 +19,26 @@ public class AppUserController {
 
     private final AppUserService appUserService;
 
-    @GetMapping("me")
-    public AppUserResponse getCurrentUser(@AuthenticationPrincipal User user) {
-        System.out.println(user);
-        AppUser appUser = appUserService.getUserByUsername(user.getUsername());
-        return new AppUserResponse(appUser.id(), appUser.username(), appUser.role());
+    @GetMapping("/me")
+    public AppUserResponse getCurrentUser(@AuthenticationPrincipal User user){
+            AppUser appUser = appUserService.getUserByUsername(user.getUsername());
+            return new AppUserResponse(appUser.id(), appUser.username(), appUser.role(),appUser.items());
     }
 
-    @PostMapping
+    @PostMapping("/login")
+    public AppUserResponse login(@AuthenticationPrincipal User user){
+        return appUserService.getLoggedInUser(user);
+    }
+
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public AppUserResponse register(@RequestBody AppUserRegisterDto appUserRegisterDto) throws BadRequest {
         if(appUserService.userExistsByUsername(appUserRegisterDto.username())){
             throw new BadRequest("Username already exists");
         }
         else{
-            AppUser appUser = appUserService.addUser(appUserRegisterDto);
-            return new AppUserResponse(appUser.id(), appUser.username(), appUser.role());
+            AppUser appUser = appUserService.register(appUserRegisterDto);
+            return new AppUserResponse(appUser.id(), appUser.username(), appUser.role(),appUser.items());
         }
     }
 
