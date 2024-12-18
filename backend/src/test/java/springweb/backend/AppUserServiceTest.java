@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import springweb.backend.model.AppUser;
 import springweb.backend.model.AppUserRegisterDto;
+import springweb.backend.model.AppUserResponse;
 import springweb.backend.model.AppUserRole;
 import springweb.backend.repository.AppUserRepository;
 import springweb.backend.service.AppUserService;
@@ -33,6 +35,8 @@ class AppUserServiceTest {
     private AppUserRegisterDto appUserRegisterDto;
     private AppUser appUser;
 
+    private User mockUser;
+
     @BeforeEach
     void setUp() {
         // Initialize mocks and the test data
@@ -40,6 +44,10 @@ class AppUserServiceTest {
 
         appUserRegisterDto = new AppUserRegisterDto("testuser", "password");
         appUser = new AppUser("1L", "testuser", "encodedPassword", AppUserRole.USER, null);
+
+        mockUser = mock(User.class);
+        when(mockUser.getUsername()).thenReturn("testuser");
+
     }
 
     @Test
@@ -49,7 +57,7 @@ class AppUserServiceTest {
         when(userRepo.save(any(AppUser.class))).thenReturn(appUser);
 
         // Act
-        AppUser savedUser = appUserService.addUser(appUserRegisterDto);
+        AppUser savedUser = appUserService.register(appUserRegisterDto);
 
         // Assert
         assertNotNull(savedUser);
@@ -65,7 +73,7 @@ class AppUserServiceTest {
     @Test
     void testGetUserByUsername_UserExists() {
         // Arrange
-        when(userRepo.findByUsername("testuser")).thenReturn(Optional.of(appUser));
+        when(userRepo.findAppUserByUsername("testuser")).thenReturn(Optional.of(appUser));
 
         // Act
         AppUser foundUser = appUserService.getUserByUsername("testuser");
@@ -76,23 +84,23 @@ class AppUserServiceTest {
         assertEquals(AppUserRole.USER, foundUser.role());
 
         // Verify interaction
-        verify(userRepo, times(1)).findByUsername("testuser");
+        verify(userRepo, times(1)).findAppUserByUsername("testuser");
     }
 
     @Test
     void testGetUserByUsername_UserDoesNotExist() {
         // Arrange
-        when(userRepo.findByUsername("nonexistentuser")).thenReturn(Optional.empty());
+        when(userRepo.findAppUserByUsername("nonexistentuser")).thenReturn(Optional.empty());
 
         // Act & Assert
         NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> {
             appUserService.getUserByUsername("nonexistentuser");
         });
 
-        assertEquals("User with username: nonexistentuser does not exist!", thrown.getMessage());
+        assertEquals("User not found.", thrown.getMessage());
 
         // Verify interaction
-        verify(userRepo, times(1)).findByUsername("nonexistentuser");
+        verify(userRepo, times(1)).findAppUserByUsername("nonexistentuser");
     }
 
     @Test
@@ -123,5 +131,25 @@ class AppUserServiceTest {
 
         // Verify interaction
         verify(userRepo, times(1)).existsByUsername("nonexistentuser");
+    }
+
+
+    @Test
+    void testGetLoggedInUser_Success() {
+        // Arrange: Mock the getUserByUsername method to return an AppUser
+        when(userRepo.findAppUserByUsername(anyString())).thenReturn(java.util.Optional.of(appUser));
+
+        // Act: Call the method
+        AppUserResponse response = appUserService.getLoggedInUser(mockUser);
+
+        // Assert: Verify that the returned AppUserResponse contains the correct values
+        assertNotNull(response);
+        assertEquals(appUser.id(), response.id());
+        assertEquals(appUser.username(), response.username());
+        assertEquals(appUser.role(), response.role());
+        assertEquals(appUser.items(), response.items());
+
+        // Verify that the getUserByUsername method was called once with the correct username
+        verify(userRepo, times(1)).findAppUserByUsername("testuser");
     }
 }

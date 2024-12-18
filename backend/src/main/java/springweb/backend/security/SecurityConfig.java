@@ -34,6 +34,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/item/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/item/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/item/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/users/me").authenticated()
                         .anyRequest().permitAll())
                 .logout(l->l.logoutSuccessUrl(appUrl))
                 .httpBasic(c -> {

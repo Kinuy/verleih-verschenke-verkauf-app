@@ -48,7 +48,7 @@ export default function App() {
                 <Route path={"/storage"} element={<ItemGallery items={items}/>}/>
                 <Route path={"/account"} element={<Account updateUser={updateUser}/>}/>
                 <Route path={"/account/login"} element={<AccountLogin updateUser={updateUser}/>}/>
-                <Route path={"/account/create"} element={<AccountCreate/>}/>
+                <Route path={"/account/register"} element={<AccountCreate/>}/>
                 <Route path={"*"} element={<p>Page not found!</p>}/>
 
                 <Route element={<ProtectedRoute user={user} />}>
