@@ -10,8 +10,13 @@ export default function Home(props: Props) {
     return (
         <div className="home-container">
             {(props.user !== undefined) ? <h1>Welcome <br/> to the <br/> StuffLoop <br/> {props.user.username}.</h1> :
-                <h1>Welcome <br/> to the <br/> StuffLoop.<br/><br/> Please sign in!</h1>}
+                <h1>Welcome <br/> to the <br/> StuffLoop.<br/>
+
+                    <br/> Please sign in!</h1>}
+
+            <img className="logo-container" src="/public/Logo.png" alt="nichts vorhanden"/>
 
         </div>
+
     );
 }
