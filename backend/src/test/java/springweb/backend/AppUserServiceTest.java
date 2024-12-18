@@ -49,7 +49,7 @@ class AppUserServiceTest {
         when(userRepo.save(any(AppUser.class))).thenReturn(appUser);
 
         // Act
-        AppUser savedUser = appUserService.addUser(appUserRegisterDto);
+        AppUser savedUser = appUserService.register(appUserRegisterDto);
 
         // Assert
         assertNotNull(savedUser);
@@ -65,7 +65,7 @@ class AppUserServiceTest {
     @Test
     void testGetUserByUsername_UserExists() {
         // Arrange
-        when(userRepo.findByUsername("testuser")).thenReturn(Optional.of(appUser));
+        when(userRepo.findAppUserByUsername("testuser")).thenReturn(Optional.of(appUser));
 
         // Act
         AppUser foundUser = appUserService.getUserByUsername("testuser");
@@ -76,23 +76,23 @@ class AppUserServiceTest {
         assertEquals(AppUserRole.USER, foundUser.role());
 
         // Verify interaction
-        verify(userRepo, times(1)).findByUsername("testuser");
+        verify(userRepo, times(1)).findAppUserByUsername("testuser");
     }
 
     @Test
     void testGetUserByUsername_UserDoesNotExist() {
         // Arrange
-        when(userRepo.findByUsername("nonexistentuser")).thenReturn(Optional.empty());
+        when(userRepo.findAppUserByUsername("nonexistentuser")).thenReturn(Optional.empty());
 
         // Act & Assert
         NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> {
             appUserService.getUserByUsername("nonexistentuser");
         });
 
-        assertEquals("User with username: nonexistentuser does not exist!", thrown.getMessage());
+        assertEquals("User not found.", thrown.getMessage());
 
         // Verify interaction
-        verify(userRepo, times(1)).findByUsername("nonexistentuser");
+        verify(userRepo, times(1)).findAppUserByUsername("nonexistentuser");
     }
 
     @Test

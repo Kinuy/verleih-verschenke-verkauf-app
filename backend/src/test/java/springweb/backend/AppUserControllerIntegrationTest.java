@@ -78,7 +78,7 @@ class AppUserControllerIntegrationTest {
 
 
         // Act & Assert: Perform the POST request and validate the response
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/users")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/users/register")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
