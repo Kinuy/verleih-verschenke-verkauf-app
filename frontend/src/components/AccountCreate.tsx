@@ -7,9 +7,9 @@ import axiosAccess from "../utility/access.ts";
 export default function AccountCreate() {
 
     const [accountData,setAccountData] = useState<{ username: string, password: string }>({username: "", password: ""})
-    const [user, setUser] = useState<AppUser | undefined>(undefined)
+    const [user, setUser] = useState<AppUser | undefined | null>(undefined)
     const registration = () => {
-        axiosAccess.post("/api/users", {
+        axiosAccess.post("/api/users/register", {
 
             username: accountData.username,
             password: accountData.password
@@ -19,6 +19,7 @@ export default function AccountCreate() {
                 setUser(element.data)
             })
             .catch((error) => {
+                setUser(null)
                 console.error("Error registering user:", error);
             });
     }

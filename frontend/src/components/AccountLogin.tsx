@@ -22,7 +22,7 @@ export default function AccountLogin(props: Props) {
 
     const login = () => {
 
-        axiosAccess.get("/api/users/me", {
+        axiosAccess.post("/api/users/login",undefined,{
             auth: {
                 username: accountData.username,
                 password: accountData.password
@@ -31,10 +31,12 @@ export default function AccountLogin(props: Props) {
             .then((response) => {
                 props.updateUser(response.data)
                 setUser(response.data)
-                navigate("/");
+                console.log("logged in")
+                navigate("/")
+
             })
             .catch(e=>{
-                setUser(null)
+                setUser(undefined)
                 console.error(e)
             })
     }
@@ -42,7 +44,7 @@ export default function AccountLogin(props: Props) {
     const logout = () => {
         const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080' : window.location.origin
 
-        window.open(host + '/', '_self')
+        window.open(host + "/", '_self')
     }
 
     // const logout2 = () =>{
@@ -85,7 +87,7 @@ export default function AccountLogin(props: Props) {
                 }
                 <h6>
                     Don't have an account?
-                    <Link to="/account/create" className="no-link-style">Create account</Link>
+                    <Link to="/account/register" className="no-link-style">Create account</Link>
                 </h6>
             </div>
         </div>
