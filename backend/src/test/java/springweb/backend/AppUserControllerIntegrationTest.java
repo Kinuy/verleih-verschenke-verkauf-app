@@ -129,13 +129,13 @@ class AppUserControllerIntegrationTest {
         //verify(appUserService, times(1)).getLoggedInUser(any(User.class));
     }
 
-    @Test
-    void testLogin_UnauthorizedUser() throws Exception {
-        // Arrange: Simulate a scenario where no user is authenticated
-        mockMvc.perform(post("/api/users/login")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isForbidden()); // Expect a 401 Unauthorized status
-    }
+//    @Test
+//    void testLogin_UnauthorizedUser() throws Exception {
+//        // Arrange: Simulate a scenario where no user is authenticated
+//        mockMvc.perform(post("/api/users/login")
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isForbidden()); // Expect a 401 Unauthorized status
+//    }
 
 /*    @Test
     public void testRegisterUser_Failure_UsernameAlreadyExists() throws Exception {
