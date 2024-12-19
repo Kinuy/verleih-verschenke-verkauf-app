@@ -189,7 +189,7 @@ export default function NewItemCard(props: Props) {
                             fetchItemDetails(id);
                         }}
                     >
-                        <option value="">--Select item to update--</option>
+                        <option value="">-Add item or update below-</option>
                         {
                             props.items.map((element) => (
                                 <option key={element.id} value={element.id}>

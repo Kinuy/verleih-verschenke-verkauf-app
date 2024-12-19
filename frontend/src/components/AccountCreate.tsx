@@ -38,7 +38,7 @@ export default function AccountCreate() {
                 <button className="button-container"  onClick={registration}>Sign up</button>
                 <h6>
                     Already have an account?
-                    <Link to="/account/login" className="no-link-style">Sign in</Link>
+                    <Link to="/account/login" className="no-link-style"> Sign in </Link>
                 </h6>
             </div>
         </div>

@@ -16,13 +16,22 @@
 .item-description-container{
     margin-top: 10px;
     text-align: left;
-    padding: 5px;
+    padding: 8px;
+    font-family: 'Arial', sans-serif;
+    font-size: x-small;
+}
+.label-container{
+    word-spacing: 20px;
+    padding: 1px;
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+    font-size: x-small;
 }
 .item-detail-content-container{
     align-content: center;
     padding: 5px;
     list-style: none;
-    text-align: center;
+    text-align: left;
     font-size: x-small;
     color: white;
 }

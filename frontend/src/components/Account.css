@@ -34,13 +34,17 @@ input{
 }
 
 .no-link-style{
+    margin-left: 5px;
+    padding: 2px;
     text-decoration: none;
     color: inherit;
 }
 .no-link-style:hover{
+
+    border-radius: 5px;
     text-decoration: none;
     color: inherit;
-    background-color: hsla(54, 100%, 50%, 0.9);
+    background-color: hsla(205, 100%, 80%, 0.7);
 }
 
 .label-container{

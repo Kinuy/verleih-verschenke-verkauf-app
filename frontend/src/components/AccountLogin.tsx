@@ -101,7 +101,7 @@ export default function AccountLogin(props: Props) {
                 }
                 <h6>
                     Don't have an account?
-                    <Link to="/account/register" className="no-link-style">Create account</Link>
+                    <Link to="/account/register" className="no-link-style"> Create account </Link>
                 </h6>
             </div>
         </div>
